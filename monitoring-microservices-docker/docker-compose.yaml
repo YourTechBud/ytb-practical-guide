@@ -1,0 +1,76 @@
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+    - 9090:9090
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+  grafana:
+    image: grafana/grafana
+    ports:
+    - 3000:3000
+    depends_on: [prometheus]
+
+  ###############################################################
+  #            Agent to collect runtime metrics                 #
+  ############################################################### 
+  cadvisor:
+    image: google/cadvisor:latest
+    container_name: cadvisor
+    volumes:
+    - /:/rootfs:ro
+    - /var/run:/var/run:rw
+    - /sys:/sys:ro
+    - /var/lib/docker/:/var/lib/docker:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 512M
+
+  ###############################################################
+  #                          HA proxy                           #
+  ###############################################################        
+  haproxy:
+    image: haproxy:2.3
+    ports:
+    - 11000:11000
+    volumes:
+    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+    depends_on: [svc-greeter, svc-math]
+
+  haproxy-exporter:
+    image: prom/haproxy-exporter
+    command: '--haproxy.scrape-uri="http://haproxy:8404/stats;csv"'
+    depends_on: [haproxy]
+
+  ###############################################################
+  #                       Our Microservices                     #
+  ###############################################################
+  svc-greeter:
+    image: spaceuptech/greeter
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 512M
+
+  svc-math:
+    image: spaceuptech/basic-service
+    deploy:
+      resources:
+        limits:
+          cpus: '0.05'
+          memory: 512M
