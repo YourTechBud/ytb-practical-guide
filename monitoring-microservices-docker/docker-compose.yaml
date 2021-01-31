@@ -12,6 +12,7 @@ services:
         limits:
           cpus: '1'
           memory: 512M
+
   grafana:
     image: grafana/grafana
     ports:

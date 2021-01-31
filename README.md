@@ -6,6 +6,5 @@ The repository contains reference materials for the DevOps related videos made o
 
 ### Monitoring Microservices in Docker using Prometheus and Grafana
 
-- Reference Material - 
-- YouTube Video -
-- Blog Post -
+- Reference Material - [https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker](https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker)
+- YouTube Video - [https://youtu.be/jUhacrwEwDk](https://youtu.be/jUhacrwEwDk)
