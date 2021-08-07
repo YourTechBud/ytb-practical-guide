@@ -1,0 +1,60 @@
+version: '3.9'
+services:
+  gateway:
+    image: "spaceuptech/gateway:0.21.4"
+    pull_policy: "if_not_present"         # other values never, if_not_present
+    restart: "always"                     # other values no, on-failure
+    environment:
+      - DEV=true                         # Turn this to false for production mode
+      - CLUSTER_ID=prod-cluster
+      - CONFIG=/config/config.yaml
+      - ADMIN_USER=admin                 # Log in username
+      - ADMIN_PASS=1234                  # Log in password
+      - ADMIN_SECRET=some-secret         # Space cloud uses this secret for parsing jwt tokens for config APIs
+      - LOG_LEVEL=debug                  # other values info, warn
+      - LOG_FORMAT=text                  # other values text
+      - DISABLE_UI=false
+      - LETSENCRYPT_STORE=local
+      - REDIS_CONN=redis:6379
+      - SSL_ENABLE=false
+      - SSL_CERT=""
+      - SSL_KEY=""
+    volumes:
+      - ./sc-config:/config
+    depends_on:
+      - redis
+      - postgres
+    ports:
+      - "4122:4122"
+
+      # Name it redis
+  redis:
+    image: "redis:6.0"
+
+  postgres:
+      image: postgres:latest
+      restart: always
+      environment: 
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+      ports:
+        - '5432:5432'
+      volumes:
+        - ./postgres-data:/var/lib/postgresql/data
+        # copy the sql script to create tables
+        - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+        # copy the sql script to fill tables
+        - ./sql/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+
+  user-service:
+    build: users-service/
+    ports:
+      - "8081:8081"
+
+  post-service: 
+    build: posts-service/
+    ports:
+      - "8082:8082"      
+
+volumes:
+  postgres-data:
