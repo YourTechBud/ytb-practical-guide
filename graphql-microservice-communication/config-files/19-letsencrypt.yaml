@@ -1,0 +1,8 @@
+api: /v1/config/projects/{project}/letsencrypt/config/{id}
+meta:
+  id: letsencrypt
+  project: myproject
+spec:
+  domains: []
+type: letsencrypt
+---

@@ -2,21 +2,21 @@ const http = require('http');
 
 users = [
    {
-      "id":"1",
+      "id": "1",
       "name": "Tom",
       "address": "random address",
       "city": "Newyork",
       "age": 40
    },
    {
-      "id":"2",
+      "id": "2",
       "name": "Mike",
       "address": "random address",
       "city": "Mumbai",
       "age": 21
    },
    {
-      "id":"3",
+      "id": "3",
       "name": "Lee",
       "address": "random address",
       "city": "Bejing",
@@ -34,7 +34,7 @@ http.createServer(function (req, res) {
       res.write(JSON.stringify(users)); //write a response
       res.end(); //end the response
 
-   } else if (url.startsWith('/get/users')) {      
+   } else if (url.startsWith('/get/users')) {
 
       arr = url.split('/')
       userId = arr[arr.length - 1]
@@ -50,7 +50,7 @@ http.createServer(function (req, res) {
       res.writeHead(404, { 'Content-Type': 'application/json' }); // http header
       res.end(); //end the response
 
-   }else {
+   } else {
 
       res.writeHead(404, { 'Content-Type': 'text/html' }); // http header
       res.write('<h1>Invalid URL!<h1>'); //write a response

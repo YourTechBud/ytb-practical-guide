@@ -1,0 +1,10 @@
+api: /v1/config/projects/{project}/database/{dbAlias}/collections/{col}/schema/mutate
+meta:
+  col: post_stats
+  dbAlias: postgres
+  project: myproject
+spec:
+  schema: "type  post_stats {\n \tpost_id: Varchar! @primary(order: 1) @size(value:
+    250) \n\tcomments: Integer! \n\tlikes: Integer! \n\tviews: Integer! \n}"
+type: db-schema
+---

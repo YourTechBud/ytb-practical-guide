@@ -1,0 +1,93 @@
+api: /v1/config/projects/{project}/remote-service/service/{id}
+meta:
+  id: posts
+  project: myproject
+spec:
+  endpoints:
+    getAllPosts:
+      cacheOptions:
+      - args.url
+      graphTemplate: ""
+      kind: internal
+      method: GET
+      outputFormat: yaml
+      path: /list/posts
+      requestPayloadFormat: json
+      requestTemplate: ""
+      responseTemplate: ""
+      rule:
+        rule: allow
+      template: go
+      timeout: 60
+    getPostById:
+      cacheOptions:
+      - args.url
+      graphTemplate: ""
+      kind: internal
+      method: POST
+      outputFormat: yaml
+      path: /get/posts/{args.postId}
+      requestPayloadFormat: json
+      requestTemplate: ""
+      responseTemplate: ""
+      rule:
+        rule: allow
+      template: go
+      timeout: 60
+    getPostsByUserId:
+      cacheOptions:
+      - args.url
+      graphTemplate: ""
+      kind: internal
+      method: GET
+      outputFormat: yaml
+      path: /get/posts/{args.userId}
+      requestPayloadFormat: json
+      requestTemplate: ""
+      responseTemplate: ""
+      rule:
+        rule: allow
+      template: go
+      timeout: 60
+  url: http://post-service:8082
+type: remote-services
+---
+api: /v1/config/projects/{project}/remote-service/service/{id}
+meta:
+  id: users
+  project: myproject
+spec:
+  endpoints:
+    getAllUsers:
+      cacheOptions:
+      - args.url
+      graphTemplate: ""
+      kind: internal
+      method: GET
+      outputFormat: yaml
+      path: /list/users
+      requestPayloadFormat: json
+      requestTemplate: ""
+      responseTemplate: ""
+      rule:
+        rule: allow
+      template: go
+      timeout: 60
+    getUserById:
+      cacheOptions:
+      - args.url
+      graphTemplate: ""
+      kind: internal
+      method: GET
+      outputFormat: yaml
+      path: /get/users/{args.userId}
+      requestPayloadFormat: json
+      requestTemplate: ""
+      responseTemplate: ""
+      rule:
+        rule: allow
+      template: go
+      timeout: 60
+  url: http://user-service:8081
+type: remote-services
+---

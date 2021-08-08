@@ -1,0 +1,12 @@
+api: /v1/config/projects/{project}/database/{db}/prepared-queries/{id}
+meta:
+  db: postgres
+  id: default
+  project: myproject
+spec:
+  args: []
+  rule:
+    rule: allow
+  sql: ""
+type: db-prepared-query
+---

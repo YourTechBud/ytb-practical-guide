@@ -1,0 +1,15 @@
+api: /v1/config/projects/{project}/database/{dbAlias}/config/{id}
+meta:
+  dbAlias: postgres
+  id: postgres-config
+  project: myproject
+spec:
+  conn: postgres://postgres:mysecretpassword@postgres:5432/postgres?sslmode=disable
+  driverConf: {}
+  enabled: true
+  isPrimary: false
+  limit: 1000
+  name: public
+  type: postgres
+type: db-config
+---
