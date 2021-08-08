@@ -1,0 +1,13 @@
+api: /v1/config/projects/{project}/file-storage/config/{id}
+meta:
+  id: filestore-configs
+  project: myproject
+spec:
+  bucket: ""
+  conn: ""
+  enabled: false
+  endpoint: ""
+  secret: ""
+  storeType: ""
+type: filestore-configs
+---

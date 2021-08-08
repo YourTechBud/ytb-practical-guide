@@ -1,0 +1,8 @@
+api: /v1/config/projects/{project}/routing/ingress/global
+meta:
+  project: myproject
+spec:
+  headers: null
+  resHeaders: null
+type: ingress-global
+---

@@ -1,0 +1,17 @@
+api: /v1/config/projects/{project}/database/{dbAlias}/collections/{col}/rules
+meta:
+  col: default
+  dbAlias: postgres
+  project: myproject
+spec:
+  rules:
+    create:
+      rule: allow
+    delete:
+      rule: allow
+    read:
+      rule: allow
+    update:
+      rule: allow
+type: db-rules
+---

@@ -2,37 +2,37 @@ const http = require('http');
 
 posts = [
    {
-      "id":"1",
+      "id": "1",
       "userId": "1",
       "title": "How to make microservices communicate",
       "ts": "Sun Aug  1 09:40:14 IST 2021"
    },
    {
-      "id":"2",
+      "id": "2",
       "userId": "1",
       "title": "What is graphql",
       "ts": "Sun May  1 09:40:14 IST 2020"
    },
    {
-      "id":"3",
+      "id": "3",
       "userId": "2",
       "title": "What are microservices",
       "ts": "Mon Jun  1 09:40:19 IST 2021"
    },
    {
-      "id":"4",
+      "id": "4",
       "userId": "2",
       "title": "What is devops",
       "ts": "Sun May  1 09:40:14 IST 2020"
    },
    {
-      "id":"5",
+      "id": "5",
       "userId": "3",
       "title": "How to secure your database",
       "ts": "Mon Jun  1 09:40:19 IST 2021"
    },
    {
-      "id":"6",
+      "id": "6",
       "userId": "3",
       "title": "What is terraform & How to use it",
       "ts": "Sun May  1 09:40:14 IST 2020"
@@ -49,7 +49,7 @@ http.createServer(function (req, res) {
       res.write(JSON.stringify(posts)); //write a response
       res.end(); //end the response
 
-   } else if (url.startsWith('/get/posts/user')) {      
+   } else if (url.startsWith('/get/posts/user')) {
 
       arr = url.split('/')
       userId = arr[arr.length - 1]
@@ -64,7 +64,7 @@ http.createServer(function (req, res) {
       res.write(JSON.stringify(temp)); //write a response
       res.end(); //end the response
 
-   } else if (url.startsWith('/get/posts')) {      
+   } else if (url.startsWith('/get/posts')) {
 
       arr = url.split('/')
       postId = arr[arr.length - 1]
