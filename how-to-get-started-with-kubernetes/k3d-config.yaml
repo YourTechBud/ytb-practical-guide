@@ -1,0 +1,27 @@
+apiVersion: k3d.io/v1alpha2
+kind: Simple
+
+name: my-local-cluster
+
+# Change the number to create a multi node cluster
+# servers: 3
+# agents: 1
+
+kubeAPI:
+  hostPort: '6445'
+
+ports:
+  - port: 8080:80
+    nodeFilters:
+      - loadbalancer
+
+registries:
+  use:
+    - k3d-registry:5000
+
+options:
+  k3d:
+    wait: true
+  k3s:
+    extraServerArgs:
+      - --disable=traefik
