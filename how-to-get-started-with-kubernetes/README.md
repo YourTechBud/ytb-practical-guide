@@ -47,7 +47,7 @@ kubectl describe pods greeting-app
 
 ### Accessing shell of the container running inside the pod
 ```
-kubectl run my-shell --rm -i --tty --image curlimages/curl:7.80.0 --sh
+kubectl run my-shell --rm -i --tty --image curlimages/curl:7.80.0 -- sh
 ```
 
 ```
