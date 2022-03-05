@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: space-cloud
+  labels:
+    app: space-cloud
+data:
+  config.yaml: |
+    cacheConfig:
+      conn: ""
+      defaultTTL: 0
+      enabled: false
+    clusterConfig:
+      enableTelemetry: false
+      letsencryptEmail: ""
+    integrations: {}
+    integrationsHooks: {}
+    projects:
+      istiodemo:
+        auths: {}
+        dbConfigs: {}
+        dbPreparedQuery: {}
+        dbRules: {}
+        dbSchemas: {}
+        eventingConfig:
+          dbAlias: ""
+          enabled: false
+        eventingRules: {}
+        eventingSchemas: {}
+        eventingTriggers: {}
+        fileStoreConfig:
+          bucket: ""
+          conn: ""
+          enabled: false
+          endpoint: ""
+          secret: ""
+          storeType: ""
+        fileStoreRules: {}
+        ingressGlobal:
+          headers: null
+          resHeaders: null
+        ingressRoute: {}
+        letsencrypt:
+          domains: null
+        projectConfig:
+          aesKey: NDBkOGQ5YzE3Mzc2NDBjMmI3Yjc4ODc1MTJjNTdiMTM=
+          contextTimeGraphQL: 5
+          id: istiodemo
+          name: istiodemo
+          secrets:
+          - alg: ""
+            aud: null
+            isPrimary: true
+            iss: null
+            jwkUrl: ""
+            kid: Wi+S3OYS6Nign7J5fD3E4bqtDwqC6Qs1034hbzucGUM=
+            privateKey: ""
+            publicKey: ""
+            secret: 01571800c2c94760a44e842fe5b188c3
+        remoteServices:
+          first-cluster--istiodemo--remote-service--greeting:
+            endpoints:
+              greet:
+                cacheOptions:
+                - args.url
+                graphTemplate: ""
+                headers:
+                - key: Content-Type
+                  op: set
+                  value: application/json
+                kind: internal
+                method: GET
+                outputFormat: yaml
+                path: /greeting/{args.name}
+                requestPayloadFormat: json
+                requestTemplate: ""
+                responseTemplate: ""
+                rule:
+                  rule: allow
+                template: go
+                timeout: 60
+            id: greeting
+            url: http://greeter-app.default.svc.cluster.local:8080
+          first-cluster--istiodemo--remote-service--httpbin:
+            endpoints:
+              echoBack:
+                cacheOptions:
+                - args.url
+                graphTemplate: ""
+                kind: internal
+                method: POST
+                outputFormat: yaml
+                path: /anything
+                requestPayloadFormat: json
+                requestTemplate: ""
+                responseTemplate: ""
+                rule:
+                  rule: allow
+                template: go
+                timeout: 60
+            id: httpbin
+            url: http://httpbin.default.svc.cluster.local:8080
+    ssl:
+      crt: none
+      enabled: true
+      key: none

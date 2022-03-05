@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: space-cloud
+  labels:
+    app: space-cloud
+spec:
+  selector:
+    matchLabels:
+      app: space-cloud
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: space-cloud
+    spec:
+      containers:
+        - name: space-cloud
+          command: [ "./app", "run" ]
+          image: spacecloudio/gateway:0.21.5
+          imagePullPolicy: IfNotPresent # IfNotPresent | Always
+          livenessProbe:
+            exec:
+              command:
+                - ./app
+                - health-check
+                - -timeout=5
+            initialDelaySeconds: 100
+            periodSeconds: 10
+          volumeMounts:
+          - mountPath: /space-cloud/
+            name: space-cloud-config-file
+          env:
+            - name: "NODE_ID"
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.uid
+            - name: "GOOGLE_APPLICATION_CREDENTIALS"
+              value: "/root/.gcp/credentials.json"
+            - name: "ADMIN_USER"
+              value: "admin"
+            - name: "ADMIN_PASS"
+              value: "1234"
+            - name: "ADMIN_SECRET"
+              value: "some-secret"
+            - name: "LOG_LEVEL"
+              value: "debug"
+            - name: "LOG_FORMAT"
+              value: "json"
+            - name: "STORE_TYPE"
+              value: "local"
+            - name: "LETSENCRYPT_STORE"
+              value: "kube"
+            - name: "DEV"
+              value: "true" # Turn this to false for production mode
+            - name: "SSL_ENABLE"
+              value: "true"
+            - name: "CLUSTER_ID"
+              value: "first-cluster"
+            - name: "REDIS_CONN"
+              value: "redis.default.svc.cluster.local:6379"
+            - name: "CONFIG"
+              value: "/space-cloud/config.yaml"
+          ports:
+            - containerPort: 4122
+            - containerPort: 4126
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+      volumes:
+        - name: space-cloud-config-file
+          configMap:
+            name: space-cloud

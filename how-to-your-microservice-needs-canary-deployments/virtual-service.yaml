@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-vs
+spec:
+  hosts:
+  - greeter-app
+  http:
+    - name: primary
+      route:
+        - destination:
+            host: internal-greeter-app-stable
+          weight: 90
+        - destination:
+            host: internal-greeter-app-canary
+          weight: 10
+
+    - name: jwt-role-check
+      match:
+        - headers
+            @request.auth.claims.role:
+              exact: qa-tester
+      route:
+        - destination:
+            host: internal-greeter-app-canary

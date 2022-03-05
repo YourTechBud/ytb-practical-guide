@@ -1,0 +1,236 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+  - space-cloud.io
+  - gateway.space-cloud.svc.cluster.local
+  gateways:
+  - gateway
+  - mesh
+  http:
+  - route:
+    - destination:
+        host: gateway.space-cloud.svc.cluster.local
+        subset: stable
+      weight: 90
+    - destination:
+        host: gateway.space-cloud.svc.cluster.local
+        subset: canary
+      weight: 10
+
+
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: default
+      route:
+        - destination:
+            host: gateway.space-cloud.svc.cluster.local
+            subset: stable
+          weight: 85
+        - destination:
+            host: gateway.space-cloud.svc.cluster.local
+            subset: canary
+          weight: 10
+        - destination:
+            host: gateway.space-cloud.svc.cluster.local
+            subset: experiment
+          weight: 5
+
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+  - space-cloud.io
+  gateways:
+  - gateway
+  http:
+  - route:
+    - destination:
+        port:
+          number: 8000
+        host: gateway.space-cloud.svc.cluster.local
+
+
+# 
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: default
+      route:
+        - destination:
+            host: gateway.space-cloud.svc.cluster.local
+            subset: stable
+          weight: 85
+        - destination:
+            host: gateway.space-cloud.svc.cluster.local
+            subset: canary
+          weight: 10
+        - destination:
+            host: gateway.space-cloud.svc.cluster.local
+            subset: experiment
+          weight: 5
+
+
+# Virtual service behaviour settings
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: route-1
+      rewrite:
+        uri: /v2-beta
+      timeout: 30s
+      retries:
+        attempts: 3
+        perTryTimeout: 2s
+        retryOn: connect-failure,503
+      # other fields
+      ...
+
+# Service with canary settings
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: default
+      route:
+        - destination:
+            host: internal-gateway-app-stable
+          weight: 90
+        - destination:
+            host: internal-gateway-app-canary
+          weight: 10
+
+
+# Service with 
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: route-1
+      match: 
+        - headers:
+            end-user:
+              exact: jason
+        - uri:
+            prefix: /v1/logs/
+          ignoreUriCase: true
+      route:
+        - destination:
+            host: host-name
+    - name: default
+      route:
+        - destination:
+            host: host-name
+      # other fields
+      ...
+
+
+# Service with match only field
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: route-1
+      match: 
+        - headers:
+            end-user:
+              exact: jason
+        - uri:
+            prefix: /v1/logs/
+          ignoreUriCase: true
+      # other fields
+      ...
+
+
+# Service with all possiblities
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+    - gateway.space-cloud.svc.cluster.local
+  http:
+    - name: route-1
+      match: 
+        - uri:
+        - headers:
+      route:
+        - destination:
+            host: host-name
+      rewrite:
+      timeout: 30s
+      retries:
+        attempts: 3
+      ...
+
+
+# Simple gateway service
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: gateway-vs
+spec:
+  hosts:
+  - gateway.space-cloud.svc.cluster.local
+  http:
+  - route:
+    - destination:
+        host: host-name
+
+
+# Simple service
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: my-vs
+spec:
+  hosts:
+  - host-name
+  http:
+  - route:
+    - destination:
+        host: host-name
+
+
+

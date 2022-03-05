@@ -1,0 +1,11 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: redis
+spec:
+  hosts:
+  - redis.default.svc.cluster.local
+  tcp:
+  - route:
+    - destination:
+        host: redis.default.svc.cluster.local

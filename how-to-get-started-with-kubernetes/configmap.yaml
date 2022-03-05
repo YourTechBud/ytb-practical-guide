@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
+data:
+  foo.txt: |
+    Do like this video &
+    smash that subscribe button 🔔
+  config.yaml: |
+    ip-address: 192.168.0.2
+    port: 6379
+  
+  
+  REDIS_HOST: 192.168.0.1
+  REDIS_PORT: 6379

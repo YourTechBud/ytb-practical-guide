@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: greeter-app
+spec:
+  selector:
+    app: greeter-app
+  type: ClusterIP
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080

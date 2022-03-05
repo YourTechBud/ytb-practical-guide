@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greeter-app-v2
+  labels:
+    app: greeter-app
+    version: v2
+spec:
+  selector:
+    matchLabels:
+      app: greeter-app
+      version: v2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: greeter-app
+        version: v2
+    spec:
+      containers:
+      - name: main
+        image: spaceuptech/greeter:latest
+        env:
+        - name: GREETING
+          value: Hello

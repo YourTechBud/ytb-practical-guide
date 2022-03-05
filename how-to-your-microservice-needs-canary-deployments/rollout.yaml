@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: greeter-app
+spec:
+  # Entire deployment object can be written here
+  # replica: 3
+  # ...
+  strategy:
+    canary:
+      canaryService: internal-greeter-app-canary
+      stableService: internal-greeter-app-stable
+      trafficRouting:
+        istio:
+           virtualService: 
+            name: istio-vs
+            routes:
+            - primary
+      steps:
+      - setWeight: 10
+      - pause: {} # pause indefinitely
+      - setWeight: 50
+      - pause: {duration: 2m}
+      - analysis:
+          templates:
+          - templateName: success-rate
+          args: 
+
+

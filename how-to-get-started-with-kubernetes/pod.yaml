@@ -9,8 +9,30 @@ spec:
   containers:
   - name: greeting-app
     image: spaceuptech/greeter:latest
+    env:
+    - name: REDIS_HOST
+      value: 192.168.0.1
+    - name: REDIS_PORT
+      value: 6379
     ports:
     - containerPort: 8080
+
+
+
+  volumes:
+    - name: redis-volume
+      configMap:
+        name: redis-config
+        items:
+        - key: foo.txt
+          path: redis
+    volumeMounts:
+    - name: redis-volume
+      mountPath: /etc/config
+  volumes:
+  - name: redis-volume
+    configMap:
+      name: redis-config
     resources:
       requests:
         memory: "64Mi"
@@ -18,9 +40,12 @@ spec:
       limits:
         memory: "128Mi"
         cpu: "500m"    
-    livenessProbe:
-      httpGet:
-        path: /greeting/john
-        port: 8080
-      initialDelaySeconds: 3
-      periodSeconds: 3
+    env:
+    - name: REDIS_HOST
+      valueFrom:
+        configMapKeyRef:
+          name: redis-config
+          key: REDIS_HOST    
+    envFrom:
+    - configMapRef:
+        name: redis-config

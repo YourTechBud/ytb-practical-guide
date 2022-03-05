@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: greeter-app
+spec:
+  hosts:
+  - greeter-app.default.svc.cluster.local
+  http:
+  - name: default
+    route:
+    - destination:
+        host: greeter-app.default.svc.cluster.local
+        subset: v1
+      weight: 50
+    - destination:
+        host: greeter-app.default.svc.cluster.local
+        subset: v2
+      weight: 50

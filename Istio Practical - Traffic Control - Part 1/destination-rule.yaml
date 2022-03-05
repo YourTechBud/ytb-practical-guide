@@ -1,0 +1,68 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: gateway-dr
+spec:
+  host: gateway.space-cloud.svc.cluster.local
+  subsets:
+  - name: stable
+    labels:
+      version: v1
+  - name: canary
+    labels:
+      version: v2
+  - name: experiment
+    labels:
+      version: v3
+
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: gateway-dr
+spec:
+  host: gateway.space-cloud.svc.cluster.local
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+    connectionPool:
+      tcp:
+        maxConnections: 100
+        connectTimeout: 30ms
+        tcpKeepalive:
+          time: 7200s
+    outlierDetection:
+    tls:
+      mode: MUTUAL
+
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: gateway-dr
+spec:
+  host: gateway.space-cloud.svc.cluster.local
+  subsets:
+  - name: stable
+    labels:
+      version: v1
+  - name: canary
+    labels:
+      version: v2
+
+
+
+# Simple DNS
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: my-ds
+spec:
+  host: host-name
+  trafficPolicy:
+    loadBalancer:
+      simple: LEAST_CONN
+
+
+
+

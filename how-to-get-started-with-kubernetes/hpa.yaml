@@ -1,15 +1,104 @@
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: greeting-app-cron-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    deploymentName: greeting-app
+  triggers:
+  - type: prometheus
+    metadata:
+      # Required fields:
+      serverAddress: http://<prometheus-host>:9090
+      metricName: http_requests_total 
+      query: |
+        sum(rate(http_requests_total
+        {deployment="my-deployment"}[2m])) 
+      threshold: '100'
+
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: greeting-app-cron-hpa
+  namespace: default
+spec:
+  scaleTargetRef:
+    deploymentName: greeting-app
+  triggers:
+  - type: cron
+    metadata:
+      # Required
+      timezone: Asia/Kolkata  
+      start: 30 * * * *       
+      end: 45 * * * *         
+      desiredReplicas: "20"
+
+
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: scaledobject-name
+  namespace: scaledobject-namespace
+spec:
+  scaleTargetRef:
+    deploymentName: deployment-name
+  triggers:
+    - type: external
+      metadata:
+        scalerAddress: external-svc:9090
+        key1: value1
+        key2: value2
+
+
+
+apiVersion: keda.k8s.io/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {scaled-object-name}
+  namespace: default
+spec:
+  scaleTargetRef:
+    deploymentName: {deployment-name}
+  triggers:
+  - type: rabbitmq
+    metadata:
+    # type specific fields
+      queueName: hello
+      host: {secret-key-name}
+      queueLength  : '5'
+
+
+
+
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   labels:
-    app: greeting-app
-    version: latest
+    app: greeting-app-hpa
+    version: v1
   name: greeting-app-hpa
 spec:
+  # scaleTargetRef:
+  # ...
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+
+
+
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: greeting-app-deployment
+    name: greeting-app
   minReplicas: 1
   maxReplicas: 3
-  targetCPUUtilizationPercentage: 6
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+
+
