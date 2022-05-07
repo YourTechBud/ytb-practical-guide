@@ -1,4 +1,4 @@
-## Prerequistes
+# Prerequistes
 
 **Ensure Local Database & Prod Database Schemas Are In Sync**. We are using the below schema for our local & prod dbs 👇
 
@@ -8,6 +8,7 @@ create table trainer (id serial, name varchar(100), city varchar(100), primary k
 create table pokemon (id serial, name varchar(100), power int, caught_on timestamp, trainer_id int, primary key (id), foreign key (trainer_id) references trainer(id));
 ```
 
+# Prisma Onboarding
 
 ## Step 1. Generate Inital Migration File From Local DB
 
@@ -51,13 +52,15 @@ export DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5433/postg
 npx prisma migrate resolve --applied v1.0.0
 ```
 
-## Step 5. Make Changes In Local DB
+# Handling Subsequent Changes
+
+## Step 1. Make Changes In Local DB
 
 ```
 ALTER TABLE pokemon RENAME COLUMN combat_power TO combat_power_level;
 ```
 
-## Step 7. Pull New Local DB Schema Changes In schema.prisma
+## Step 2. Pull New Local DB Schema Changes In schema.prisma
 
 ```
 export DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5435/postgres?schema=local"
@@ -73,14 +76,14 @@ mkdir -p prisma/migrations/v2.0.0
 mv migration.sql prisma/migrations/v2.0.0
 ```
 
-## Step 8. Verify the generated migration file
+## Step 3. Verify the generated migration file
 
 As our migration file is not as per out expectation, we have changed this to the below SQL command 👇
 ```
 ALTER TABLE "pokemon" RENAME COLUMN "power" TO "power_level";
 ```
 
-## Step 9. Run Migration On Prod DB
+## Step 4. Run Migration On Prod DB
 
 ```
 export DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5433/postgres?schema=prod"
