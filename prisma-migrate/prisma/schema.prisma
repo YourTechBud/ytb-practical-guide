@@ -1,0 +1,20 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model pokemon {
+  id          Int       @id @default(autoincrement())
+  name        String?   @db.VarChar(100)
+  power_level Int?
+  caught_on   DateTime? @db.Timestamp(6)
+  trainer_id  Int?
+  trainer     trainer?  @relation(fields: [trainer_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model trainer {
+  id      Int       @id @default(autoincrement())
+  name    String?   @db.VarChar(100)
+  city    String?   @db.VarChar(100)
+  pokemon pokemon[]
+}
