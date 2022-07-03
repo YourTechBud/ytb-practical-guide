@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  serviceName:  "fnejf"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      securityContext:
+        runAsNonRoot: false
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsNonRoot: true
+      - name: nginx1
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        securityContext:
+          runAsNonRoot: true
