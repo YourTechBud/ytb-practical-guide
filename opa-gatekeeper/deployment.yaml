@@ -1,11 +1,10 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: nginx-deployment
   labels:
     app: nginx
 spec:
-  serviceName:  "fnejf"
   replicas: 3
   selector:
     matchLabels:
