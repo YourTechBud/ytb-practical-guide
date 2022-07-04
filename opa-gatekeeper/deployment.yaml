@@ -23,9 +23,3 @@ spec:
         - containerPort: 80
         securityContext:
           runAsNonRoot: true
-      - name: nginx1
-        image: nginx:latest
-        ports:
-        - containerPort: 80
-        securityContext:
-          runAsNonRoot: true
