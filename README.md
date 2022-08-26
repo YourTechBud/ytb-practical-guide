@@ -1,6 +1,6 @@
-# DevOps Guide by YourTechBud
+# Practical Guides by YourTechBud
 
-The repository contains reference materials for the DevOps related videos made on the [YourTechBud Codes YouTube channel](https://www.youtube.com/channel/UCtwEIq8U94Hnd-A0kl5GkZA).
+The repository contains reference materials for the DevOps related videos made on the [YourTechBud Codes YouTube channel](https://www.youtube.com/c/BackstageWithArchitects).
 
 ## Guides
 
@@ -13,3 +13,6 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material - [Repo](./google-cloud-run-introduction/)
 - YouTube Video - [https://youtu.be/jUhacrwEwDk](https://youtu.be/jUhacrwEwDk)
+
+### Shifting Policy Management left with OPA Gatekeeper
+- Reference Material - [Repo](./opa-gatekeeper)
