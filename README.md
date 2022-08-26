@@ -10,4 +10,4 @@ The repository contains reference materials for the DevOps related videos made o
 - YouTube Video - [https://youtu.be/jUhacrwEwDk](https://youtu.be/jUhacrwEwDk)
 
 ### Shifting policy management left with OPA Gatekeeper
-- Reference Material - [OPA-Gatekeeper](/opa-gatekeeper/Readme.md)
+- Reference Material - [Repo](./opa-gatekeeper/Readme.md)
