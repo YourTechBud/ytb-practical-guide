@@ -12,7 +12,7 @@ import (
 	"github.com/gorilla/mux"
 )
 
-var greeting string = "hell"
+var greeting string = "hi"
 var delay int = 10
 
 func main() {
