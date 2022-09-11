@@ -1,0 +1,26 @@
+name: Continuously Deploy Master Branch
+on:
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  cd:
+    name: Deploy Master Branch
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: auth
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          project_id: space-cloud
+
+      - name: 'Deploy Function'
+        run: 'gcloud functions deploy greeter --trigger-http --gen2 --runtime go116 --region us-east1 --entry-point=GreeterGet'
