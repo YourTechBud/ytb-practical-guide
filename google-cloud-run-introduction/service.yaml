@@ -1,0 +1,38 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+    client.knative.dev/user-image: us-east1-docker.pkg.dev/space-cloud/cloud-run-source-deploy/greeter
+    run.googleapis.com/ingress: all
+    run.googleapis.com/ingress-status: all
+  labels:
+    cloud.googleapis.com/location: us-east1
+  name: greeter
+  namespace: '332138526349'
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/maxScale: '100'
+        client.knative.dev/user-image: us-east1-docker.pkg.dev/space-cloud/cloud-run-source-deploy/greeter
+        run.googleapis.com/client-name: gcloud
+        run.googleapis.com/client-version: 397.0.0
+      name: greeter-00002-xen
+    spec:
+      containerConcurrency: 80
+      containers:
+      - image: us-east1-docker.pkg.dev/space-cloud/cloud-run-source-deploy/greeter:0.2.0
+        ports:
+        - containerPort: 8080
+          name: http1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 512Mi
+      serviceAccountName: 332138526349-compute@developer.gserviceaccount.com
+      timeoutSeconds: 300
+  traffic:
+  - revisionName: greeter-00001-xen
+    percent: 50
+  - latestRevision: true
+    percent: 50

@@ -1,13 +1,18 @@
-# DevOps Guide by YourTechBud
+# Practical Guides by YourTechBud
 
-The repository contains reference materials for the DevOps related videos made on the [YourTechBud Codes YouTube channel](https://www.youtube.com/channel/UCtwEIq8U94Hnd-A0kl5GkZA).
+The repository contains reference materials for the DevOps related videos made on the [YourTechBud Codes YouTube channel](https://www.youtube.com/c/BackstageWithArchitects).
 
 ## Guides
 
 ### Monitoring Microservices in Docker using Prometheus and Grafana
 
-- Reference Material - [https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker](https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker)
+- Reference Material - [Repo](https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker)
 - YouTube Video - [https://youtu.be/jUhacrwEwDk](https://youtu.be/jUhacrwEwDk)
 
-### Shifting policy management left with OPA Gatekeeper
-- Reference Material - [Repo](./opa-gatekeeper/Readme.md)
+### Google Cloud Run Introduction
+
+- Reference Material - [Repo](./google-cloud-run-introduction/)
+- YouTube Video - [https://youtu.be/bKBBbryKj1w](https://youtu.be/bKBBbryKj1w)
+
+### Shifting Policy Management left with OPA Gatekeeper
+- Reference Material - [Repo](./opa-gatekeeper)
