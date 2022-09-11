@@ -1,4 +1,4 @@
-module github.com/YourTechBud/practical-guide/google-cloud-run-introduction
+module github.com/YourTechBud/practical-guide/google-cloud-functions-introduction
 
 go 1.17
 

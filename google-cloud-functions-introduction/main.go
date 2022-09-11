@@ -23,7 +23,7 @@ func greetingHandler(w http.ResponseWriter, r *http.Request) {
 	log.Println("Received request. Sending Greeting.")
 
 	// Check if PR number is set
-	prNumber := os.Getenv("PR_NUMBER")
+	prNumber := os.Getenv("PR_NO")
 	if prNumber != "" {
 		message = fmt.Sprintf("%s there from #%s", greeting, prNumber)
 	}
