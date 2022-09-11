@@ -2,7 +2,7 @@
 
 > Here's a link to the YouTube video explaining this setup in greater detail: 
 
-[![Cloud Run Introduction](./cloud-run-basic.png)](https://www.youtube.com/watch?v=_mbCYn9hc2c)
+[![Cloud Run Introduction](./cloud-run-basic.png)](https://youtu.be/bKBBbryKj1w)
 
 ## Prerequisites
  
