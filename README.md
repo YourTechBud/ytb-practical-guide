@@ -14,5 +14,10 @@ The repository contains reference materials for the DevOps related videos made o
 - Reference Material - [Repo](./google-cloud-run-introduction/)
 - YouTube Video - [https://youtu.be/bKBBbryKj1w](https://youtu.be/bKBBbryKj1w)
 
+### Google Cloud Functions Introduction
+
+- Reference Material - [Repo](./google-cloud-functions-introduction/)
+- YouTube Video - [https://youtu.be/I0vJDmw6P4c](https://youtu.be/I0vJDmw6P4c)
+
 ### Shifting Policy Management left with OPA Gatekeeper
 - Reference Material - [Repo](./opa-gatekeeper)

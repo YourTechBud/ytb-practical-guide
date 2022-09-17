@@ -1,0 +1,46 @@
+name: Create Preview Environment
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:
+  SERVICE_NAME: greeter-${{ github.event.number }}
+
+jobs:
+  new-func:
+    name: Create Preview Environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: auth
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          project_id: space-cloud
+
+      - name: 'Deploy Function'
+        run: |
+          gcloud functions deploy $SERVICE_NAME \
+            --set-env-vars='PR_NO=${{ github.event.number }}' \
+            --allow-unauthenticated --trigger-http --gen2 --runtime go116 --region us-east1 --entry-point=GreeterGet
+
+      - name: 'Get PREVIEW URL'
+        run: |
+          echo PREVIEW_URL=$(gcloud functions describe $SERVICE_NAME --gen2 --region us-east1 --format="value(serviceConfig.uri)") >> $GITHUB_ENV
+      
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Preview URL: ${process.env.PREVIEW_URL}`
+            })

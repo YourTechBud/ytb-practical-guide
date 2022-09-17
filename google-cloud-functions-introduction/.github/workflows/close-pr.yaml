@@ -1,0 +1,40 @@
+name: Destroy Preview Environment
+on:
+  pull_request:
+    types: [closed]
+
+env:
+  SERVICE_NAME: greeter-${{ github.event.number }}
+
+jobs:
+  new-func:
+    name: Destroy Preview Environment
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: auth
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          project_id: space-cloud
+
+      - name: 'Delete Function'
+        run: |
+          gcloud functions delete $SERVICE_NAME --gen2 --region us-east1
+
+      - uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `Preview URL successfully destroyed`
+            })
