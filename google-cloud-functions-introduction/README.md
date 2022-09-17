@@ -1,4 +1,4 @@
-# Google Cloud Run Introduction
+# Google Cloud Functions Introduction
 
 > Here's a link to the YouTube video explaining this setup in greater detail: 
 
@@ -11,7 +11,7 @@
 
 ## Steps To Reproduce The Video
 
-### 1] Deploy Your Code On Google Cloud Function
+### 1] Deploy Your Code On Google Cloud Functions
 
 ```bash
 gcloud functions deploy greeter --trigger-http --gen2 --runtime go116 --region us-east1 --entry-point=GreeterGet
