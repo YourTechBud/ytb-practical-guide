@@ -1,0 +1,17 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: second-vela-app
+spec:
+  components:
+    - name: second-vela-app
+      type: backend
+      properties:
+        image: spacecloud-io/greeter
+        port: 8000
+      traits:
+        - type: cpuscaler
+          properties:
+            min: 3
+            max: 5
+            cpuUtil: 70

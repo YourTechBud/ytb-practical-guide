@@ -1,0 +1,18 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: third-vela-app
+spec:
+  components:
+    - name: third-vela-app
+      type: backend
+      properties:
+        image: spacecloud-io/greeter
+        port: 8000
+      traits:
+        - type: cronscaler
+          properties:
+            timezone: America/Toronto  # The acceptable values would be a value from the IANA Time Zone Database.
+            start: 30 * * * *          # Every hour on the 30th minute
+            end: 45 * * * *            # Every hour on the 45th minute
+            desiredReplicas: "10" 
