@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app.oam.dev/appRevision: ""
+    app.oam.dev/component: second-vela-app
+    app.oam.dev/name: second-vela-app
+    app.oam.dev/namespace: default
+    app.oam.dev/resourceType: WORKLOAD
+    workload.oam.dev/type: backend
+  name: second-vela-app
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: second-vela-app
+  template:
+    metadata:
+      labels:
+        app: second-vela-app
+    spec:
+      containers:
+      - image: spacecloud-io/greeter
+        name: second-vela-app
+
+---
+## From the auxiliary workload
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    app.oam.dev/appRevision: ""
+    app.oam.dev/component: second-vela-app
+    app.oam.dev/name: second-vela-app
+    app.oam.dev/namespace: default
+    app.oam.dev/resourceType: TRAIT
+    trait.oam.dev/resource: service
+    trait.oam.dev/type: AuxiliaryWorkload
+  name: second-vela-app
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 8000
+  selector:
+    app: second-vela-app
+  type: ClusterIP
+
+---
+## From the trait cpuscaler
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  annotations: {}
+  labels:
+    app.oam.dev/appRevision: ""
+    app.oam.dev/component: second-vela-app
+    app.oam.dev/name: second-vela-app
+    app.oam.dev/namespace: default
+    app.oam.dev/resourceType: TRAIT
+    trait.oam.dev/resource: cpuscaler
+    trait.oam.dev/type: cpuscaler
+  name: second-vela-app
+  namespace: default
+spec:
+  maxReplicas: 5
+  minReplicas: 3
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: second-vela-app
+  targetCPUUtilizationPercentage: 70

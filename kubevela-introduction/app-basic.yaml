@@ -1,0 +1,15 @@
+apiVersion: core.oam.dev/v1beta1
+kind: Application
+metadata:
+  name: first-vela-app
+spec:
+  components:
+    - name: first-vela-app
+      type: backend
+      properties:
+        image: spacecloud-io/greeter
+        port: 8000
+      traits:
+        - type: scaler
+          properties:
+            replicas: 3

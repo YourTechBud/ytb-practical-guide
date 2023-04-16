@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  labels:
+    app.oam.dev/appRevision: ""
+    app.oam.dev/component: first-vela-app
+    app.oam.dev/name: first-vela-app
+    app.oam.dev/namespace: default
+    app.oam.dev/resourceType: WORKLOAD
+    workload.oam.dev/type: backend
+  name: first-vela-app
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: first-vela-app
+  template:
+    metadata:
+      labels:
+        app: first-vela-app
+    spec:
+      containers:
+      - image: spacecloud-io/greeter
+        name: first-vela-app
+
+---
+## From the auxiliary workload
+apiVersion: v1
+kind: Service
+metadata:
+  annotations: {}
+  labels:
+    app.oam.dev/appRevision: ""
+    app.oam.dev/component: first-vela-app
+    app.oam.dev/name: first-vela-app
+    app.oam.dev/namespace: default
+    app.oam.dev/resourceType: TRAIT
+    trait.oam.dev/resource: service
+    trait.oam.dev/type: AuxiliaryWorkload
+  name: first-vela-app
+  namespace: default
+spec:
+  ports:
+  - name: http
+    port: 8000
+  selector:
+    app: first-vela-app
+  type: ClusterIP
+---
