@@ -1,0 +1,11 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple 
+metadata:
+  name: predictive-autoscaling
+servers: 1 
+kubeAPI: 
+  hostPort: "6449" 
+ports:
+  - port: 11000:80
+    nodeFilters:
+      - loadbalancer
