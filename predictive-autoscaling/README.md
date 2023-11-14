@@ -1,5 +1,9 @@
 # Predictive Autoscaling Applications Using Keda & Facebook Prophet
 
+> Here's a link to the YouTube video explaining this setup in greater detail: 
+
+[![Predictive Autoscaling Applications Using Keda & Facebook Prophet](./thumbnail.png)](https://youtu.be/MhlkAivKkCw)
+
 ## Prerequisites
 
 You need to have the following tools installed:
