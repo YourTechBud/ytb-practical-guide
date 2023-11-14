@@ -1,0 +1,43 @@
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: postgres-auth
+  namespace: default
+spec:
+  podIdentity:
+      provider: none
+  secretTargetRef:
+  - parameter: password
+    name: postgresql-dev
+    key: postgres-password
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: greeter-scaler
+spec:
+  scaleTargetRef:
+    name: greeter
+  pollingInterval: 10 
+  cooldownPeriod: 30 
+  maxReplicaCount: 10 
+  triggers:
+    - type: postgresql
+      metadata:
+        host: postgresql-dev.default.svc.cluster.local
+        port: "5432"
+        userName: postgres
+        dbName: postgres
+        sslmode: disable
+        query: |
+          SELECT MAX(value)
+          FROM (
+            SELECT value
+            FROM timeseries_forecast
+            WHERE timestamp > CURRENT_TIMESTAMP
+            ORDER BY timestamp
+            LIMIT 3
+          ) t;
+        targetQueryValue: "1"
+      authenticationRef:
+        name: postgres-auth

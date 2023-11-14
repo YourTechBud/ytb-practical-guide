@@ -23,5 +23,11 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material - [Repo](./kubevela-introduction/)
 
+### Predictive Autoscaling with Keda & Facebook Prophet
+
+- Reference Material - [Repo](./predictive-autoscaling/)
+- YouTube Video - [https://youtu.be/MhlkAivKkCw](https://youtu.be/MhlkAivKkCw) 
+
 ### Shifting Policy Management left with OPA Gatekeeper
+
 - Reference Material - [Repo](./opa-gatekeeper)
