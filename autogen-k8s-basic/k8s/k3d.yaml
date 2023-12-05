@@ -1,0 +1,17 @@
+apiVersion: k3d.io/v1alpha5 # this will change in the future as we make everything more stable
+kind: Simple # internally, we also have a Cluster config, which is not yet available externally
+metadata:
+  name: local # name that you want to give to your cluster (will still be prefixed with `k3d-`)
+servers: 1 # same as `--servers 1`
+kubeAPI: 
+  hostPort: "6445" # where the Kubernetes API listening port will be mapped to on your host system
+ports:
+  - port: 9000:80 
+    nodeFilters:
+      - loadbalancer
+registries:
+  use:
+    - k3d-myregistry:35137
+options:
+  k3d: 
+    wait: true 
