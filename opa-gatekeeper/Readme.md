@@ -1,6 +1,11 @@
 # Shifting policy management left with OPA Gatekeeper
 
-> Special thanks to [@khannaabhi](https://github.com/khannaabhi) for contributing this guide
+> Consider giving this repo a ✨! Thanks!!!
+
+## Acknowledgements
+Special thanks to [@khannaabhi](https://github.com/khannaabhi) for contributing this guide.
+
+## Resources
 
 This app uses the following tools:
 - [OPA-Gatekeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/)

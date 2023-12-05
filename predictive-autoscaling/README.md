@@ -1,6 +1,8 @@
 # Predictive Autoscaling Applications Using Keda & Facebook Prophet
 
-> Here's a link to the YouTube video explaining this setup in greater detail: 
+> Consider giving this repo a ✨! Thanks!!!
+
+Here's a link to the YouTube video explaining this setup in greater detail: 
 
 [![Predictive Autoscaling Applications Using Keda & Facebook Prophet](./thumbnail.png)](https://youtu.be/MhlkAivKkCw)
 

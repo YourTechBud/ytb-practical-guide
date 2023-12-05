@@ -1,6 +1,8 @@
 # Google Cloud Functions Introduction
 
-> Here's a link to the YouTube video explaining this setup in greater detail: 
+> Consider giving this repo a ✨! Thanks!!!
+
+Here's a link to the YouTube video explaining this setup in greater detail: 
 
 [![Cloud Functions Introduction](./cloud-functions.png)](https://youtu.be/I0vJDmw6P4c)
 

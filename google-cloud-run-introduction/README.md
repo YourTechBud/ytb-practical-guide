@@ -1,6 +1,8 @@
 # Google Cloud Run Introduction
 
-> Here's a link to the YouTube video explaining this setup in greater detail: 
+> Consider giving this repo a ✨! Thanks!!!
+
+Here's a link to the YouTube video explaining this setup in greater detail: 
 
 [![Cloud Run Introduction](./cloud-run-basic.png)](https://youtu.be/bKBBbryKj1w)
 

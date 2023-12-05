@@ -1,8 +1,10 @@
-# Querying Kubernetes using AutoGen
+# AutoGen DeepDive
 
-> Here's a link to the YouTube video explaining this setup in greater detail:
+> Consider giving this repo a ✨! Thanks!!!
 
-[![Querying Kubernetes using AutoGen](./thumbnail.png)]()
+Here's a link to the YouTube video explaining this setup in greater detail:
+
+[![Querying Kubernetes using AutoGen](./thumbnail.png)](https://youtu.be/OdmyDGjNiCY)
 
 ## Prerequisites
 
@@ -11,13 +13,6 @@ You need to have the following tools installed:
 - [Poetry](https://python-poetry.org/docs/)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) Or [Racher Desktop](https://rancherdesktop.io/)
 - [K3d](https://k3d.io/v5.6.0/)
-
-## Resources
-
-- Jupyter Notebook: [Generate Dataset](./notebooks/Generate%20Dataset.ipynb)
-- Jupyter Notebook: [Prediction With FB Propher](./notebooks/Prediction%20with%20Prophet.ipynb)
-- [Sample K8s Deployment](./k8s/deployment.yaml)
-- [Keda Postgres Scaler](./k8s/keda-scaledobject.yaml)
 
 ## Environment Setup
 
