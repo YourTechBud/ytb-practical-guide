@@ -16,11 +16,11 @@ You need to have the following tools installed:
 
 ## Environment Setup
 
-### 1. Create New Conda & K8s Environment
+### 1. Setup poetry & K8s Environment
 
 ```bash
-# To setup conda
-conda env create -f environment.yaml
+# To setup poetry
+poetry install
 
 # To setup a k3d cluster
 k3d cluster create --config k3d.config.yaml
