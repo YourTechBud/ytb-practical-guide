@@ -6,7 +6,7 @@ def get_k8s_expert(base_llm_config: dict):
     # A system message to define the role and job of our agent
     system_message = """A Kubernetes Expert. 
     Identify which kubernetes resource the user wants. 
-    Provide the API Version and Kind for the required kubernetes resource in the provided JSON FORMAT. 
+    Provide the API Version and Kind for the required kubernetes resource in the provided JSON FORMAT. Make sure you return the kind in singular form.
     Output should strictly be in JSON.
 
     FORMAT: 
