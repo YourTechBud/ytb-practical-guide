@@ -26,9 +26,11 @@ poetry install
 k3d cluster create --config k3d.config.yaml
 ```
 
-### 2. Install the LLM Inference Server
+### 2. Install Inferix (OpenAI compatible server)
 
-Use this [guide](https://github.com/YourTechBud/llm-inference-server) to setup the inference server locally.
+- Make sure you have [Ollama](https://ollama.ai/) installed.
+- Make sure you have pulled a model. I recommend [OpenHermes 2.5](https://ollama.ai/library/openhermes:7b-mistral-v2.5-q5_K_M).
+- Use this [guide](https://github.com/YourTechBud/inferix) to setup the inference server locally. This supports function calling which most projects do not.
 
 ### 3. Run the AutoGen App
 

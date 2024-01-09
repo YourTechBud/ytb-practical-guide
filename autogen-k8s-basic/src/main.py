@@ -16,9 +16,9 @@ def main(prompt: str):
     base_llm_config = {
         "config_list": [
             {
-                "model": "mistral-openorca",
+                "model": "mistral-openhermes",
                 "api_key": "dont-copy-this",
-                "api_base": "http://localhost:8000/api/v1",
+                "api_base": "http://localhost:8000/api/llm/v1",
                 "api_type": "open_ai",
             }
         ],
