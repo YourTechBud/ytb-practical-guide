@@ -1,0 +1,4 @@
+# created by virtualenv automatically
+.venv
+*.code-workspace
+__pycache__
