@@ -1,10 +1,10 @@
 import autogen
 
 
-def get_section_analyzer(base_llm_config: dict):
+def get_topic_analyzer(base_llm_config: dict):
     # A system message to define the role and job of our agent
     system_message = """You are a helpful AI assistant. 
-The user will provide you a note. Generate a list of topic discussed in that note. The output must obey the following "RULES":
+The user will provide you a note. Generate a list of topics discussed in that note. The output must obey the following "RULES":
 
 "RULES":
 - Output should only contain the important topics from the note.
@@ -14,7 +14,7 @@ The user will provide you a note. Generate a list of topic discussed in that not
 
     # Create and return our assistant agent
     return autogen.AssistantAgent(
-        name="Section_Analyzer",
+        name="Topic_Analyzer",
         llm_config=base_llm_config,
         system_message=system_message,
     )

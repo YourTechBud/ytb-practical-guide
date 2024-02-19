@@ -3,7 +3,7 @@ import yaml
 
 from .agent_tasks import get_tasks_creator
 from .agent_user import get_user
-from .agent_section_analyzer import get_section_analyzer
+from .agent_topic_analyzer import get_topic_analyzer
 from .agent_paraphrazer import get_paraphrazer
 from .group_chat import CustomGroupChat
 from .group_chat_manager import CustomGroupChatManager
@@ -39,12 +39,12 @@ def main():
 
     # Create our agents
     user = get_user()
-    section_analyzer = get_section_analyzer(base_llm_config)
+    topic_analyzer = get_topic_analyzer(base_llm_config)
     paraphrazer = get_paraphrazer(base_llm_config)
     task_creator = get_tasks_creator(base_llm_config)
 
     # Create our group chat
-    groupchat = CustomGroupChat(agents=[user, section_analyzer, paraphrazer, task_creator])
+    groupchat = CustomGroupChat(agents=[user, topic_analyzer, paraphrazer, task_creator])
     manager = CustomGroupChatManager(groupchat=groupchat, llm_config=base_llm_config)
 
     # Start the chat
