@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "autogen-cloud-run"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+pyautogen = "^0.2.26"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+app = "autogen_cloud_run.main:main"
