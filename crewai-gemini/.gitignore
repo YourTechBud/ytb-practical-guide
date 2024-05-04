@@ -1,0 +1,7 @@
+# created by virtualenv automatically
+.venv
+*.code-workspace
+__pycache__
+
+# Personal helper scripts
+scripts

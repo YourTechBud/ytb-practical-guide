@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "crewai-gemini"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+crewai = { extras = ["tools"], version = "^0.28.8" }
+google-generativeai = "^0.5.2"
+pyyaml = "^6.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+litellm = {extras = ["proxy"], version = "^1.35.38"}
+
+[tool.poetry.scripts]
+app = "crewai_gemini.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

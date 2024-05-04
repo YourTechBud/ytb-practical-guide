@@ -1,0 +1,7 @@
+model_list:
+  - model_name: gemini-pro ### RECEIVED MODEL NAME ###
+    litellm_params: # all params accepted by litellm.completion() - https://docs.litellm.ai/docs/completion/input
+      model: gemini/gemini-pro ### MODEL NAME sent to `litellm.completion()` ###
+
+litellm_settings:
+  callbacks: custom_callbacks.proxy_handler_instance

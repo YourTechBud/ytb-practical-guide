@@ -6,7 +6,7 @@ authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "3.10.12"
 pyautogen = "^0.1.14"
 kubernetes = "^28.1.0"
 
