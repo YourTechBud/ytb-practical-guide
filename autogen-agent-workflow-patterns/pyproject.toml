@@ -7,6 +7,7 @@ readme = "README.md"
 
 [tool.poetry.scripts]
 sequence = "workflow_patterns.sequence.main:main"
+two-agent = "workflow_patterns.two_agent.main:main"
 
 [tool.poetry.dependencies]
 python = "~3.10"
