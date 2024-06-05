@@ -15,7 +15,7 @@ OpenTofu will perform the following actions:
 
       ~ root_block_device {
             tags                  = {}
-          ~ volume_size           = 20 -> 30
+          ~ volume_size           = 20 -> 100
           ~ volume_type           = "gp2" -> "gp3"
             # (6 unchanged attributes hidden)
         }

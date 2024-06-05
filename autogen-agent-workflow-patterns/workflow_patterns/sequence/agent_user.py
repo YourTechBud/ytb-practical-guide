@@ -1,5 +1,4 @@
-import autogen
-
+from autogen import ConversableAgent
 
 
 def get_user():
@@ -7,7 +6,7 @@ def get_user():
     system_message = "A human admin. Supplies the initial prompt and nothing else."
 
     # Create and return our user agent
-    return autogen.UserProxyAgent(
+    return ConversableAgent(
         name="Admin",
         system_message=system_message,
         human_input_mode="NEVER",
