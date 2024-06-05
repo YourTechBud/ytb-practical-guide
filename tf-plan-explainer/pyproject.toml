@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "tf-plan-explainer"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@xebia.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.12"
+pyautogen = "^0.2.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
