@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "workflow_patterns"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@xebia.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+sequence = "workflow_patterns.sequence.main:main"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+pyautogen = "^0.2.28"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

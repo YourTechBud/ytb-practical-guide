@@ -1,0 +1,26 @@
+
+OpenTofu used the selected providers to generate the following execution
+plan. Resource actions are indicated with the following symbols:
+  ~ update in-place
+
+OpenTofu will perform the following actions:
+
+  # aws_instance.example will be updated in-place
+  ~ resource "aws_instance" "example" {
+        id                                   = "i-0ac4d166c958072a2"
+        tags                                 = {
+            "Name" = "example-instance"
+        }
+        # (32 unchanged attributes hidden)
+
+      ~ root_block_device {
+            tags                  = {}
+          ~ volume_size           = 20 -> 100
+          ~ volume_type           = "gp2" -> "gp3"
+            # (6 unchanged attributes hidden)
+        }
+
+        # (7 unchanged blocks hidden)
+    }
+
+Plan: 0 to add, 1 to change, 0 to destroy.
