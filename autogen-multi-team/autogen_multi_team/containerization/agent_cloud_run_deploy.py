@@ -1,6 +1,6 @@
 from autogen import ConversableAgent
 
-from autogen_cloud_run.utils.config_list import get_config_list
+from autogen_multi_team.utils.config_list import get_config_list
 
 
 def get_cloud_run_deploy_agent(llm_config: dict):

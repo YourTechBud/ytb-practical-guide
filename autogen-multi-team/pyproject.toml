@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "autogen-cloud-run"
+name = "autogen-multi-team"
 version = "0.1.0"
 description = ""
 authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
@@ -15,4 +15,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-app = "autogen_cloud_run.main:main"
+app = "autogen_multi_team.main:main"

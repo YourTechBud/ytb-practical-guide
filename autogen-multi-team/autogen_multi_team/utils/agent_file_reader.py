@@ -1,10 +1,10 @@
-from autogen import AssistantAgent
+from autogen import ConversableAgent
 
 from .helpers import read_file
 
 
 def get_file_reader_agent(llm_config: dict):
-    agent = AssistantAgent(
+    agent = ConversableAgent(
         name="File_Manager",
         llm_config=llm_config,
         system_message="""Read the suggested file based on the most recent instruction.

@@ -1,6 +1,6 @@
 from autogen import AssistantAgent
 
-from autogen_cloud_run.utils.config_list import get_config_list
+from autogen_multi_team.utils.config_list import get_config_list
 
 from .helpers import write_file
 

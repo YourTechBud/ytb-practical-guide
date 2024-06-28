@@ -6,7 +6,7 @@ def get_language_detector_agent(llm_config: dict):
         name="Language_Detector",
         system_message="""Detect which programming language this project is written in based on the directory structure. 
 Also, based on the language detected suggest which file can be read to detect the toolchain and build and run commands used.
-Make sure you print the complete file path of the suggested file to read. Include the project root the user provided
+Make sure you print the complete file path of the suggested file to read (eg. package.json, go.mod, pom.xml, etc.). Include the project root the user provided in the suggested file path.
 
 Provide the output in the following format:
 

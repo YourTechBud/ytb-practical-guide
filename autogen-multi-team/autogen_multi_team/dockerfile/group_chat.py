@@ -1,6 +1,6 @@
 from autogen import GroupChat, ConversableAgent
 
-from autogen_cloud_run.utils.human_proxy import get_human_proxy_agent
+from autogen_multi_team.utils.human_proxy import get_human_proxy_agent
 
 
 from ..utils.agent_executor import get_executor_agent

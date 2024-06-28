@@ -1,12 +1,12 @@
 import argparse
 
 
-from .containerization import get_docker_builder_gcm
-from .toolchain_discovery import get_toolchain_discovery_gcm
-from .dockerfile import get_dockerfile_creator_gcm
-from .utils.agent_user import get_user_agent
-from .utils.config_list import get_config_list
-from .utils.helpers import execute_command
+from autogen_multi_team.containerization import get_docker_builder_gcm
+from autogen_multi_team.toolchain_discovery import get_toolchain_discovery_gcm
+from autogen_multi_team.dockerfile import get_dockerfile_creator_gcm
+from autogen_multi_team.utils.agent_user import get_user_agent
+from autogen_multi_team.utils.config_list import get_config_list
+from autogen_multi_team.utils.helpers import execute_command
 
 
 def main():
@@ -26,9 +26,8 @@ def main():
 
     # Create the base llm configuration
     base_llm_config = {
-        "config_list": get_config_list("mistral-openhermes"),
+        "config_list": get_config_list(),
         "temperature": 0.0,
-        "max_tokens": 8096,
         "cache_seed": None,
         "timeout": 300,
     }
