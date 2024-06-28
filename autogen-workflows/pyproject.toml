@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "autogen-workflows"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
+readme = "README.md"
+packages = [
+  { include = "basic", from = "src" },
+  { include = "advanced", from = "src" },
+]
+
+[tool.poetry.scripts]
+basic = "basic.main:main"
+advanced = "advanced.main:main"
+
+[tool.poetry.dependencies]
+python = ">=3.11, <3.12"
+pyautogen = "^0.2.5"
+pyyaml = "^6.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
