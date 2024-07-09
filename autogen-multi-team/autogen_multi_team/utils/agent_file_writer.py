@@ -7,7 +7,7 @@ from .helpers import write_file
 
 def get_file_writer_agent(llm_config: dict):
     llm_config = llm_config.copy()
-    llm_config["config_list"] = get_config_list("qwen:32b-chat-v1.5-q4_K_M")
+    llm_config["config_list"] = get_config_list()
     agent = AssistantAgent(
         name="File_Writer",
         system_message="""Write the Dockerfile to disk.

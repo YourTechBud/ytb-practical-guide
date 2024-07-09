@@ -5,7 +5,7 @@ from autogen_multi_team.utils.config_list import get_config_list
 
 def get_dockerfile_creator_agent(llm_config: dict):
     llm_config = llm_config.copy()
-    llm_config["config_list"] = get_config_list("qwen:32b-chat-v1.5-q4_K_M")
+    llm_config["config_list"] = get_config_list()
     agent = ConversableAgent(
         name="Dockerfile_Creator",
         system_message="""Follow the conversation to create a Dockerfile. 
