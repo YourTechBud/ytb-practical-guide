@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "agent_basics"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+chat_agent = "agent_basics.chat.agent:main"
+chat_raw_i = "agent_basics.chat.raw_instruct:main"
+chat_raw_c = "agent_basics.chat.raw_chat:main"
+
+fn_agent = "agent_basics.function_calling.agent:main"
+fn_raw = "agent_basics.function_calling.raw:main"
+
+simple_agent = "agent_basics.simple.agent:main"
+simple_raw = "agent_basics.simple.raw:main"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+openai = "^1.35.10"
+pyautogen = "^0.2.32"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
