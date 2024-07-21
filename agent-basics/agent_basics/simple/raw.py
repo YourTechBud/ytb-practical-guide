@@ -13,6 +13,10 @@ def main():
     chat_completion = client.chat.completions.create(
         messages=[
             {
+                "role": "system",
+                "content": "Answer in the voice of Pikachu.",
+            },
+            {
                 "role": "user",
                 "content": question,
             }
