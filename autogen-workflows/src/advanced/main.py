@@ -1,3 +1,4 @@
+import os
 import argparse
 import yaml
 
@@ -27,15 +28,16 @@ def main():
     base_llm_config = {
         "config_list": [
             {
-                "model": "mistral-openhermes",
-                "api_key": "dont-copy-this",
-                "base_url": "http://localhost:8000/api/llm/v1",
+                "model": "Llama-3-8B-Instruct",
+                "api_key": os.getenv("OPENAI_API_KEY"),
+                "base_url": os.getenv("OPENAI_API_URL"),
             }
         ],
         "temperature": 0.0,
         "cache_seed": None,
         "timeout": 600,
     }
+
 
     # Create our agents
     user = get_user()

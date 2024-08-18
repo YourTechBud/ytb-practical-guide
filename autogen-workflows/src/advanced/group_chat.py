@@ -8,9 +8,9 @@ class CustomGroupChat(GroupChat):
     def __init__(self, agents):
         super().__init__(agents, messages=[], max_round=4)
 
-    def append(self, message: Dict):
-        if message["name"] != "Paraphrazer" and message["name"] != "Task_Creator":
-            super().append(message)
+    def append(self, message: Dict, speaker: Agent):
+        if speaker.name != "Paraphrazer" and speaker.name != "Task_Creator":
+            super().append(message, speaker)
 
     def select_speaker(self, last_speaker: Agent, selector: AssistantAgent):
         # The admin will always forward the note to the summarizer

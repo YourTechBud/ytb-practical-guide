@@ -11,7 +11,8 @@ The user will provide you a note. Generate a summary describing what the note is
 - Don't use bullet points.
 - The summary should be short and concise.
 - Identify and retain any "catchy" or memorable phrases from the original text
-- Identify and correct all grammatical errors."""
+- Identify and correct all grammatical errors.
+- Output the summary and nothing else."""
 
     # Create and return our assistant agent
     return autogen.AssistantAgent(

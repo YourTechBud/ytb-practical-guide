@@ -28,7 +28,7 @@ class CustomGroupChatManager(GroupChatManager):
             if message["role"] != "function":
                 message["name"] = speaker.name
 
-            groupchat.append(message)
+            groupchat.append(message, speaker)
 
             if self._is_termination_msg(message):
                 # The conversation is over
