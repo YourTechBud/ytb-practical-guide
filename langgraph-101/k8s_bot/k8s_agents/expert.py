@@ -1,23 +1,24 @@
 from langchain_core.messages import SystemMessage
 
-from .model import get_model
-from .state import State
+from k8s_bot.model import get_model
+from k8s_bot.state import State
 
 
 system_message = SystemMessage(
     """You are a helpful Kubernetes expert. 
 Identify which kubernetes resource the user wants. 
 Provide the API Version and Kind for the required kubernetes resource in the provided JSON FORMAT. Make sure you return the kind in singular form.
+Also identify if the user wants to look in a particular namespace. If so, provide the namespace. Naemspace will be all if the user does not specify a namespace.
 Output should strictly be in JSON.
 
 FORMAT: 
-{"api_version": "...", "kind":"..."}."""
+{"api_version": "...", "kind":"...", "namespace": "..."}."""
 )
 
 
 def get_k8s_expert(state: State):
     # Create an instance of the LLM model
-    llama3 = get_model("Llama-3-8B-Instruct")
+    llama3 = get_model("Qwen1.5-32B-Chat")
 
     # Add CRD information to the users message
     state["messages"][-1].content += (

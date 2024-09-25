@@ -1,11 +1,11 @@
 from langchain_core.messages import SystemMessage
 
-from k8s_bot.k8s_tools import k8s_tools
+from k8s_bot.k8s_agents.k8s_tools import k8s_tools
 from k8s_bot.model import get_model
 from k8s_bot.state import State
 
 system_message = SystemMessage(
-    """You are a helpful Kubernetes engineer. You call the right function to complete the task.
+    """You are a helpful AI assistant who calls the function to complete the user's task.
 
 Based on the API Version and Kind provided get all the resources from the cluster. Make sure you call the function"""
 )

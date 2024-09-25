@@ -6,7 +6,7 @@ authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.scripts]
-app = "k8s_bot.main:main"
+k8s = "k8s_bot.graph_k8s:main"
 
 [tool.poetry.dependencies]
 python = "^3.10"

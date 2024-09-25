@@ -18,13 +18,14 @@ def get_resources(
         str, "The api version is the group along with version that defines the resource"
     ],
     kind: Annotated[str, "The kind is the type of resource you want to fetch"],
+    namespace: Annotated[str, "The namespace is the scope of the resource"],
 ):
     """Get the list of resources from the provided api version and kind"""
     # Get an API object for the provide resource
     api = client.resources.get(api_version=api_version, kind=kind)
-
+    
     # Query kubernetes
-    list = api.get()
+    list = api.get(namespace=namespace if namespace != "all" else None)
 
     # Iterate over the list to only select the namespace and name fields and add them to an array
     resources = []

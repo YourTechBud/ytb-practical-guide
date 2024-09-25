@@ -1,13 +1,12 @@
 from langgraph.graph import StateGraph, START, END
 
-from k8s_bot.k8s_tools import k8s_tool_node
-from k8s_bot.agent_engineer import get_k8s_engineer
+from k8s_bot.k8s_agents.k8s_tools import k8s_tool_node
+from k8s_bot.k8s_agents.engineer import get_k8s_engineer
+from k8s_bot.k8s_agents.expert import get_k8s_expert
+from k8s_bot.state import State
 
-from .agent_expert import get_k8s_expert
-from .state import State
 
-
-def main():
+def get_graph():
     graph_builder = StateGraph(State)
 
     # Add the nodes
@@ -22,7 +21,10 @@ def main():
     graph_builder.add_edge("k8s_tool_node", END)
 
     # Build the graph
-    graph = graph_builder.compile()
+    return graph_builder.compile()
+
+def main():
+    graph = get_graph()
 
     # Get input from the user
     input_text = input("Enter Request: ")
@@ -32,5 +34,4 @@ def main():
             print("\n*******************************************\n")
             print(key + ":")
             print("---------------------\n")
-            print(event[key])
             print(event[key]["messages"][-1].content)
