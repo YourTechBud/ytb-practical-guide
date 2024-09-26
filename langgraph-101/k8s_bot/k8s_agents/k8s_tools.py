@@ -12,18 +12,14 @@ client = dynamic.DynamicClient(
 )
 
 
-@tool
 def get_resources(
-    api_version: Annotated[
-        str, "The api version is the group along with version that defines the resource"
-    ],
-    kind: Annotated[str, "The kind is the type of resource you want to fetch"],
-    namespace: Annotated[str, "The namespace is the scope of the resource"],
+    api_version: str,
+    kind: str,
+    namespace: str,
 ):
-    """Get the list of resources from the provided api version and kind"""
     # Get an API object for the provide resource
     api = client.resources.get(api_version=api_version, kind=kind)
-    
+
     # Query kubernetes
     list = api.get(namespace=namespace if namespace != "all" else None)
 
@@ -38,6 +34,18 @@ def get_resources(
     return safe_dump(resources)
 
 
-k8s_tools = [get_resources]
+@tool
+def get_resources_tool(
+    api_version: Annotated[
+        str, "The api version is the group along with version that defines the resource"
+    ],
+    kind: Annotated[str, "The kind is the type of resource you want to fetch"],
+    namespace: Annotated[str, "The namespace the resource is in"],
+):
+    """Get the list of resources from the provided api version and kind"""
+    return get_resources(api_version, kind, namespace)
+
+
+k8s_tools = [get_resources_tool]
 
 k8s_tool_node = ToolNode(k8s_tools)

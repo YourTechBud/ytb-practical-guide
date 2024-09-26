@@ -19,9 +19,11 @@ FORMAT:
 def get_k8s_expert(state: State):
     # Create an instance of the LLM model
     llama3 = get_model("Qwen1.5-32B-Chat")
-
+    
+    # Make a shallow copy of the last message in the state
+    last_message = state["messages"][-1].copy()
     # Add CRD information to the users message
-    state["messages"][-1].content += (
+    last_message.content += (
         "\n\n"
         "Use this additional information to idientify the required Kubernetes resource:"
         "ArgoCD Application = apiVersion: argoproj.io/v1alpha1, kind: Application\n"
@@ -31,7 +33,7 @@ def get_k8s_expert(state: State):
     )
 
     # Create a new messages array with the system message and state messages
-    messages = [system_message] + state["messages"]
+    messages = [system_message] + state["messages"][:-1] + [last_message]
 
     # Return the LLM response
     return {"messages": [llama3.invoke(messages)]}
