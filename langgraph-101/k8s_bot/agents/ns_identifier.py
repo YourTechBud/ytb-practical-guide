@@ -1,17 +1,17 @@
 from langchain_core.messages import SystemMessage
 
-from k8s_bot.k8s_agents.k8s_tools import get_resources
-from k8s_bot.model import get_model
-from k8s_bot.state import State
+from k8s_bot.agents.k8s_tools import get_resources
+from k8s_bot.helpers import get_model
+from k8s_bot.state_k8s import K8sState
 
-def get_ns_identifier(state: State):
+def get_ns_identifier(state: K8sState):
     # Get all the namespaces from the cluster
     namespaces = get_resources(api_version="v1", kind="Namespace", namespace="all")
 
     # Create a system message which includes the list of namespaces
     system_message = SystemMessage(
         "You are a helpful AI assistant."
-        "From the list of NAMESPACES provided, identify the namespace which the user seems to be interested in the original message ."
+        "From the list of NAMESPACES provided, identify the namespace which namespace matches the namespace mentioned in the request."
         "Make sure the user's namespace exists in the list of namespaces provided. If not, identify which namespace from the list is the closest match."
         "Explain your reasoning step-by-step. Hightlight the final answer."
         ""
@@ -23,8 +23,8 @@ def get_ns_identifier(state: State):
     model = get_model("Llama-3-8B-Instruct")
 
     # Create a new messages array with the system message and state messages
-    messages = [system_message] + state["messages"]
+    messages = [system_message] + state["k8s_internal_messages"]
 
-    return {"messages": [model.invoke(messages)]}
+    return {"k8s_internal_messages": [model.invoke(messages)]}
 
 

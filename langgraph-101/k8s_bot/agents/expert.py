@@ -1,7 +1,7 @@
 from langchain_core.messages import SystemMessage
 
-from k8s_bot.model import get_model
-from k8s_bot.state import State
+from k8s_bot.helpers import get_model
+from k8s_bot.state_k8s import K8sState
 
 
 system_message = SystemMessage(
@@ -16,13 +16,15 @@ FORMAT:
 )
 
 
-def get_k8s_expert(state: State):
+def get_k8s_expert(state: K8sState):
     # Create an instance of the LLM model
     llama3 = get_model("Qwen1.5-32B-Chat")
-    
+
     # Make a shallow copy of the last message in the state
     last_message = state["messages"][-1].copy()
-    # Add CRD information to the users message
+
+    # Add CRD information to the users message.
+    # This simulates a naive RAG pipeline.
     last_message.content += (
         "\n\n"
         "Use this additional information to idientify the required Kubernetes resource:"
@@ -36,4 +38,4 @@ def get_k8s_expert(state: State):
     messages = [system_message] + state["messages"][:-1] + [last_message]
 
     # Return the LLM response
-    return {"messages": [llama3.invoke(messages)]}
+    return {"k8s_internal_messages": [llama3.invoke(messages)]}

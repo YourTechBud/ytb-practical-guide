@@ -2,21 +2,18 @@ import json
 from typing import Literal
 from langgraph.graph import StateGraph, START, END
 
-from k8s_bot.k8s_agents.k8s_tools import k8s_tool_node
-from k8s_bot.k8s_agents.engineer import get_k8s_engineer
-from k8s_bot.k8s_agents.expert import get_k8s_expert
-from k8s_bot.k8s_agents.ns_identifier import get_ns_identifier
-from k8s_bot.state import State
+from k8s_bot.agents.k8s_tools import k8s_tool_node
+from k8s_bot.agents.engineer import get_k8s_engineer
+from k8s_bot.agents.expert import get_k8s_expert
+from k8s_bot.agents.ns_identifier import get_ns_identifier
+from k8s_bot.helpers import extract_json
+from k8s_bot.state_k8s import K8sState
 
 
-def route_ns_identifier(state: State) -> Literal["k8s_ns_identifier", "k8s_engineer"]:
-    # Extract the json text (stuff between the first '{' and last '}') from the latest message
-    last_message = state["messages"][-1].content
-    json_text = last_message[last_message.find("{") : last_message.rfind("}") + 1]
-
+def route_ns_identifier(state: K8sState) -> Literal["k8s_ns_identifier", "k8s_engineer"]:
     # Try to load the json text
     try:
-        data = json.loads(json_text)
+        data = extract_json(state["k8s_internal_messages"][-1].content)
 
         # If the value for the field "namespace" is "all", then return the ns_identifier node
         if data["namespace"] != "all":
@@ -29,7 +26,7 @@ def route_ns_identifier(state: State) -> Literal["k8s_ns_identifier", "k8s_engin
 
 
 def get_graph():
-    graph_builder = StateGraph(State)
+    graph_builder = StateGraph(K8sState)
 
     # Add the nodes
     graph_builder.add_node("k8s_expert", get_k8s_expert)
@@ -57,10 +54,10 @@ def main():
 
     # Get input from the user
     input_text = input("Enter Request: ")
-    for event in graph.stream({"messages": [input_text]}):
+    for event in graph.stream({"messages": [input_text], "k8s_internal_messages": []}):
         # Loop over each key in events and print the messages
         for key in event:
             print("\n*******************************************\n")
             print(key + ":")
             print("---------------------\n")
-            print(event[key]["messages"][-1].content)
+            print(event[key]["k8s_internal_messages"][-1].content)
