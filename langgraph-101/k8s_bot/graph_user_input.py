@@ -1,4 +1,3 @@
-import json
 from typing import Literal
 
 from langgraph.graph import StateGraph, START, END
@@ -7,7 +6,6 @@ from langchain_core.runnables import RunnableConfig
 
 from k8s_bot.agents.human_input import get_human_input
 from k8s_bot.agents.input_verifier import get_input_verifier
-from k8s_bot.helpers import extract_json
 from k8s_bot.state_user_input import UserInputState
 
 
@@ -42,7 +40,6 @@ def get_graph():
     # Build the graph
     return graph_builder.compile(checkpointer=memory, interrupt_before=["human_input"])
 
-
 def main():
     # Get the graph
     graph = get_graph()
@@ -65,7 +62,7 @@ def main():
         # Check if we need to ask user or not
         next = graph.get_state(thread).next
         if len(next) == 0 or next[0] != "human_input":
-            return
+            return graph.get_state(thread).values["question"]
 
         # Get input from the user
         print("\n*******************************************\n")

@@ -4,6 +4,7 @@ from k8s_bot.agents.k8s_tools import get_resources
 from k8s_bot.helpers import get_model
 from k8s_bot.state_k8s import K8sState
 
+
 def get_ns_identifier(state: K8sState):
     # Get all the namespaces from the cluster
     namespaces = get_resources(api_version="v1", kind="Namespace", namespace="all")
@@ -23,8 +24,6 @@ def get_ns_identifier(state: K8sState):
     model = get_model("Llama-3-8B-Instruct")
 
     # Create a new messages array with the system message and state messages
-    messages = [system_message] + state["k8s_internal_messages"]
+    messages = [system_message] + state["messages"]
 
-    return {"k8s_internal_messages": [model.invoke(messages)]}
-
-
+    return {"messages": [model.invoke(messages)]}

@@ -16,7 +16,7 @@ def get_k8s_engineer(state: K8sState):
     llama3 = get_model("Qwen1.5-32B-Chat").bind_tools(k8s_tools)
 
     # Create a new messages array with the system message and global state messages
-    messages = [system_message] + state["k8s_internal_messages"]
+    messages = [system_message] + state["messages"]
 
     # Add the llm response to the internal messages list
-    return {"k8s_internal_messages": [llama3.invoke(messages)]}
+    return {"messages": [llama3.invoke(messages)]}

@@ -38,4 +38,4 @@ def get_k8s_expert(state: K8sState):
     messages = [system_message] + state["messages"][:-1] + [last_message]
 
     # Return the LLM response
-    return {"k8s_internal_messages": [llama3.invoke(messages)]}
+    return {"messages": [llama3.invoke(messages)]}
