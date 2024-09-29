@@ -15,5 +15,5 @@ def get_model(model: str):
         base_url=os.environ["OPENAI_BASE_URL"],
         api_key=SecretStr(os.environ["OPENAI_API_KEY"]),
         model=model,
-        temperature=0,
+        temperature=0.2,
     )

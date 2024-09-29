@@ -18,7 +18,7 @@ FORMAT:
 
 def get_k8s_expert(state: K8sState):
     # Create an instance of the LLM model
-    llama3 = get_model("Qwen1.5-32B-Chat")
+    llama3 = get_model("Llama-3.1-8B-Instruct")
 
     # Make a shallow copy of the last message in the state
     last_message = state["messages"][-1].copy()

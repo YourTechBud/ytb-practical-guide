@@ -14,7 +14,7 @@ Provide the final answer in a JSON format with a boolean field "requireKubernete
     )
 
     # Get the LLM model
-    model = get_model("Qwen1.5-32B-Chat")
+    model = get_model("Llama-3.1-8B-Instruct")
 
     # Return the LLM response
     messages = [system_message, HumanMessage(state["question"])] 

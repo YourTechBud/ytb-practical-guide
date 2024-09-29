@@ -1,4 +1,4 @@
-from langchain_core.messages import SystemMessage
+from langchain_core.messages import SystemMessage, HumanMessage
 
 from k8s_bot.agents.k8s_tools import get_resources
 from k8s_bot.helpers import get_model
@@ -14,16 +14,16 @@ def get_ns_identifier(state: K8sState):
         "You are a helpful AI assistant."
         "From the list of NAMESPACES provided, identify the namespace which namespace matches the namespace mentioned in the request."
         "Make sure the user's namespace exists in the list of namespaces provided. If not, identify which namespace from the list is the closest match."
-        "Explain your reasoning step-by-step. Hightlight the final answer."
+        "Explain your reasoning step-by-step. Clearly mention what namespace should be used in the final answer."
         ""
         "NAMSAPCES:"
         f"{namespaces}"
     )
 
     # Create a model
-    model = get_model("Llama-3-8B-Instruct")
+    model = get_model("Llama-3.1-8B-Instruct")
 
     # Create a new messages array with the system message and state messages
     messages = [system_message] + state["messages"]
 
-    return {"messages": [model.invoke(messages)]}
+    return {"messages": [HumanMessage(model.invoke(messages).content)]}
