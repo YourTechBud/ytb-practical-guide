@@ -41,6 +41,7 @@ def get_graph():
 
     # Add the edges
     graph_builder.add_edge(START, "k8s_expert")
+    # We only want to run the k8s_ns_identifier node if the user specifies a namespace.
     graph_builder.add_conditional_edges(
         "k8s_expert",
         route_ns_identifier,

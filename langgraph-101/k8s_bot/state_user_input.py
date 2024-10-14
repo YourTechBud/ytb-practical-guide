@@ -1,7 +1,7 @@
-from k8s_bot.state_main import MainState
+from typing_extensions import TypedDict
 
 
-class UserInputState(MainState):
+class UserInputState(TypedDict):
     question: str
     is_valid: bool
     verifier_response: str

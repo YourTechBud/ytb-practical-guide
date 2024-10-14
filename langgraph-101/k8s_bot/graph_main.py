@@ -1,8 +1,15 @@
+from typing import Annotated
+from typing_extensions import TypedDict
+
 from langchain_core.messages import HumanMessage, AIMessage
 from langgraph.graph import StateGraph, START, END
+from langgraph.graph.message import add_messages
 
 from k8s_bot import graph_k8s, graph_user_input
-from k8s_bot.state_main import MainState
+
+
+class MainState(TypedDict):
+    messages: Annotated[list, add_messages]
 
 
 def get_human_input(state: MainState):

@@ -9,15 +9,6 @@ from k8s_bot.agents.input_verifier import get_input_verifier
 from k8s_bot.state_user_input import UserInputState
 
 
-def route_human_input(state: UserInputState) -> Literal["human_input", "__end__"]:
-    # If the value for the field "requireKubernetesInteraction" is true, then return the __end__ node
-    if state["is_valid"]:
-        return "__end__"
-
-    # Return the human_input node by default
-    return "human_input"
-
-
 def get_graph():
     graph_builder = StateGraph(UserInputState)
 
@@ -30,7 +21,7 @@ def get_graph():
     graph_builder.add_edge("human_input", "input_verifier")
     graph_builder.add_conditional_edges(
         "input_verifier",
-        route_human_input,
+        lambda state: END if state["is_valid"] else "human_input",
         {"human_input": "human_input", "__end__": END},
     )
 
