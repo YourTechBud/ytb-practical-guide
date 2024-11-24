@@ -13,6 +13,11 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material - [Repo](./autogen-workflows/)
 
+### Langgraph 101
+
+- Reference Material (for Python) - [Repo](./langgraph-101)
+- Reference Material (for Typescript) - [Repo](./langgraph-101-ts)
+
 ## Kubernetes Guides
 
 ### Predictive Autoscaling with Keda & Facebook Prophet
