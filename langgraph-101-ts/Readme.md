@@ -24,7 +24,14 @@ pnpm install
 - Feel free to use OpenAI or any OpenAI compatible server. 
 - Use this [guide to setup inferix](https://github.com/YourTechBud/inferix) to host a OpenAI compatible API capable of function calling.
 
-### 3. Run App
+### 3. Set the environment variables
+
+- `INFERIX_BASE_URL`
+- `INFERIX_API_KEY`
+
+> You can change these by updating the `./src/utils/models.ts` file.
+
+## Run The App
 
 We got 4 scripts in this project:
 1. `pnpm run 00` - Making a simple inference call using langchain js.
