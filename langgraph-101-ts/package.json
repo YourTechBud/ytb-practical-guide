@@ -1,0 +1,28 @@
+{
+  "name": "langgraph-101-ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "00": "pnpm tsx src/00-langchain-models.ts",
+    "01": "pnpm tsx src/01-first-graph.ts",
+    "02": "pnpm tsx src/02-first-tool.ts",
+    "03": "pnpm tsx src/03-final-graph.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/core": "^0.3.18",
+    "@langchain/langgraph": "^0.2.22",
+    "@langchain/openai": "^0.3.14",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.3",
+    "tsx": "^4.19.2"
+  }
+}
