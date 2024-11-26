@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "rag_101"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+01 = "rag_101.01_humble_call:main"
+02 = "rag_101.02_hack_the_rag:main"
+03 = "rag_101.03_playing_with_vectors:main"
+04 = "rag_101.04_first_rag:main"
+05 = "rag_101.05_first_rag_again:main"
+06 = "rag_101.06_smarter_rag:main"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "^1.55.1"
+numpy = "^2.1.3"
+scikit-learn = "^1.5.2"
+tiktoken = "^0.8.0"
+langchain-text-splitters = "^0.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

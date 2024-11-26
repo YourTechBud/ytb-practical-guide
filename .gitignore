@@ -1,1 +1,4 @@
 scripts
+__pycache__
+.venv
+

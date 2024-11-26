@@ -18,6 +18,10 @@ The repository contains reference materials for the DevOps related videos made o
 - Reference Material (for Python) - [Repo](./langgraph-101)
 - Reference Material (for Typescript) - [Repo](./langgraph-101-ts)
 
+### RAG 101
+
+- Reference Material - [Repo](./rag-101)
+
 ## Kubernetes Guides
 
 ### Predictive Autoscaling with Keda & Facebook Prophet
