@@ -28,7 +28,7 @@ def main():
     base_llm_config = {
         "config_list": [
             {
-                "model": "Llama-3-8B-Instruct",
+                "model": "Llama-3.1-8B-Instruct",
                 "api_key": os.getenv("OPENAI_API_KEY"),
                 "base_url": os.getenv("OPENAI_API_URL"),
             }

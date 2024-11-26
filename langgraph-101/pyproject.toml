@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "k8s_bot"
+version = "0.1.0"
+description = ""
+authors = ["Noorain Panjwani <noorain.panjwani@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+basic-bot = "k8s_bot.graph_bot:main"
+basic-tools = "k8s_bot.graph_tools:main"
+expert = "k8s_bot.graph_expert:main"
+k8s = "k8s_bot.graph_k8s:main"
+input = "k8s_bot.graph_user_input:main"
+main = "k8s_bot.graph_main:main"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langgraph = "^0.2.21"
+langchain-openai = "^0.2.0"
+kubernetes = "^30.1.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
