@@ -20,9 +20,11 @@ poetry install
 
 ### 2. Install Inferix (OpenAI compatible API)
 
+> Note: You can use any OpenAI compatible backend or simply use OpenAI itself.
+
 - Feel free to use any OpenAI compatible API.
 - Make sure you have [Ollama](https://ollama.ai/) installed.
-- Make sure you have pulled a model. I recommend [OpenHermes 2.5](https://ollama.ai/library/openhermes:7b-mistral-v2.5-q5_K_M).
+- Make sure you have pulled a model. I recommend [Qwen 2.5 32B](https://ollama.com/library/qwen2.5:32b).
 - Use this [guide to setup inferix](https://github.com/YourTechBud/inferix) to host a OpenAI compatible API capable of function calling.
 
 ### 3. Set the environment variables
