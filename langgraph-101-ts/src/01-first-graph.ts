@@ -1,8 +1,8 @@
-import * as dotenv from 'dotenv';
-import { ChatOpenAI } from "@langchain/openai";
-import { SystemMessage, HumanMessage, BaseMessage } from "@langchain/core/messages";
-import { StateGraph, Annotation } from "@langchain/langgraph";
-import { askQuestion, closeInterface, getModelConfig } from './utils';
+import * as dotenv from 'dotenv'
+import { ChatOpenAI } from "@langchain/openai"
+import { SystemMessage, HumanMessage, BaseMessage } from "@langchain/core/messages"
+import { StateGraph, Annotation } from "@langchain/langgraph"
+import { askQuestion, closeInterface, getModelConfig } from './utils'
 
 // Load environment variables
 dotenv.config()

@@ -1,4 +1,4 @@
-# Building Agents Using Langgraph JS
+# Building Agents Using Langgraph TS
 
 > Consider giving this repo a ✨! Thanks!!!
 

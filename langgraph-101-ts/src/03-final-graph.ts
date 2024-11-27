@@ -1,9 +1,9 @@
-import * as dotenv from 'dotenv';
-import { ChatOpenAI } from "@langchain/openai";
-import { SystemMessage, HumanMessage, BaseMessage } from "@langchain/core/messages";
-import { StateGraph, Annotation } from "@langchain/langgraph";
-import { ToolNode } from "@langchain/langgraph/prebuilt";
-import { askQuestion, closeInterface, extractJsonFromString, getModelConfig, getPendingTasks, toolMarkTaskAsDone, toolNewTask, toolReadTasks } from './utils';
+import * as dotenv from 'dotenv'
+import { ChatOpenAI } from "@langchain/openai"
+import { SystemMessage, HumanMessage, BaseMessage } from "@langchain/core/messages"
+import { StateGraph, Annotation } from "@langchain/langgraph"
+import { ToolNode } from "@langchain/langgraph/prebuilt"
+import { askQuestion, closeInterface, extractJsonFromString, getModelConfig, getPendingTasks, toolMarkTaskAsDone, toolNewTask, toolReadTasks } from './utils'
 
 // Load environment variables
 dotenv.config()
@@ -62,7 +62,7 @@ const identifyAction = async (state: typeof StateAnnotation.State) => {
 }
 
 // The node to identify the title of the task which matches our database
-const identifyTitle = async (state: typeof StateAnnotation.State) => {
+const findMatchingTitle = async (state: typeof StateAnnotation.State) => {
     const model = new ChatOpenAI(getModelConfig('Qwen-2.5-32B-Instruct'))
 
     // Create a system & human message
@@ -147,7 +147,7 @@ const shouldIdentifyTitle = (state: typeof StateAnnotation.State) => {
     }
 
     if (state.action === 'markTaskAsDone') {
-        return 'identifyTitle'
+        return 'findMatchingTitle'
     }
 
     return 'agent'
@@ -179,13 +179,13 @@ const isSummarizationNeeded = (state: typeof StateAnnotation.State) => {
 // Create our first graph
 const workflow = new StateGraph(StateAnnotation)
     .addNode("identifyAction", identifyAction)
-    .addNode("identifyTitle", identifyTitle)
+    .addNode("findMatchingTitle", findMatchingTitle)
     .addNode("agent", agent)
     .addNode("tool", toolNode)
     .addNode("taskSummarizer", taskSummarizer)
     .addEdge("__start__", "identifyAction")
     .addConditionalEdges('identifyAction', shouldIdentifyTitle)
-    .addConditionalEdges('identifyTitle', isTitlePresent)
+    .addConditionalEdges('findMatchingTitle', isTitlePresent)
     .addEdge("agent", "tool")
     .addConditionalEdges("tool", isSummarizationNeeded)
     .addEdge("taskSummarizer", "__end__")
@@ -206,14 +206,14 @@ for await (
 ) {
     for (const [node, values] of Object.entries(chunk)) {
         console.log('Receiving update from node:', node)
-        const typedValues = values as { messages: BaseMessage[], action: string, isTitlePresent: boolean };
+        const typedValues = values as { messages: BaseMessage[], action: string, isTitlePresent: boolean }
         switch (node) {
             case 'identifyAction':
                 console.log('Action:', typedValues.action)
-                break;
+                break
             default:
                 console.log('Content:', typedValues.messages[0].content)
-                break;
+                break
         }
         console.log('---')
     }

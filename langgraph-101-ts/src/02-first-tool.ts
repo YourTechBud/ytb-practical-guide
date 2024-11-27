@@ -1,9 +1,9 @@
-import * as dotenv from 'dotenv';
-import { ChatOpenAI } from "@langchain/openai";
-import { SystemMessage, HumanMessage, BaseMessage } from "@langchain/core/messages";
-import { StateGraph, Annotation } from "@langchain/langgraph";
-import { ToolNode } from "@langchain/langgraph/prebuilt";
-import { askQuestion, closeInterface, getModelConfig, toolReadTasks } from './utils';
+import * as dotenv from 'dotenv'
+import { ChatOpenAI } from "@langchain/openai"
+import { SystemMessage, HumanMessage, BaseMessage } from "@langchain/core/messages"
+import { StateGraph, Annotation } from "@langchain/langgraph"
+import { ToolNode } from "@langchain/langgraph/prebuilt"
+import { askQuestion, closeInterface, getModelConfig, toolReadTasks } from './utils'
 
 // Load environment variables
 dotenv.config()
@@ -86,7 +86,7 @@ for await (
 ) {
     for (const [node, values] of Object.entries(chunk)) {
         console.log('Receiving update from node:', node)
-        const typedValues = values as { messages: BaseMessage[] };
+        const typedValues = values as { messages: BaseMessage[] }
         console.log('Values:', typedValues.messages[0].content)
         console.log('---')
     }

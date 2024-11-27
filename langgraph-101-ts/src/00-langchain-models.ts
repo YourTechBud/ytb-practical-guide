@@ -1,5 +1,5 @@
-import * as dotenv from 'dotenv';
-import { ChatOpenAI } from "@langchain/openai";
+import * as dotenv from 'dotenv'
+import { ChatOpenAI } from "@langchain/openai"
 
 // Load environment variables
 dotenv.config()
