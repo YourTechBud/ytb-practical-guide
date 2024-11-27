@@ -1,9 +1,9 @@
-import { tool } from '@langchain/core/tools';
-import { z } from 'zod';
-import { markTaskAsDone, newTask, readTasks } from './tasks';
+import { tool } from '@langchain/core/tools'
+import { z } from 'zod'
+import { markTaskAsDone, newTask, readTasks } from './tasks'
 
 export const toolReadTasks = tool((_input: any) => {
-  return readTasks();
+  return readTasks()
 }, {
   name: 'readTasks',
   description: 'Read all tasks',
@@ -13,7 +13,7 @@ export const toolReadTasks = tool((_input: any) => {
 })
 
 export const toolNewTask = tool((input: any) => {
-  return newTask(input.task);
+  return newTask(input.task)
 }, {
   name: 'newTask',
   description: 'Add a new task',
@@ -23,7 +23,7 @@ export const toolNewTask = tool((input: any) => {
 })
 
 export const toolMarkTaskAsDone = tool((input: any) => {
-  return markTaskAsDone(input.title);
+  return markTaskAsDone(input.title)
 }, {
   name: 'markTaskAsDone',
   description: 'Mark a task as done',

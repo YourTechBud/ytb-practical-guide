@@ -42,7 +42,7 @@ def main():
     similarities = compute_cosine_similarity(embeddings, prompt_embedding)
 
     # Pick out the top 5 most similar chunks
-    results = find_top_k(data, similarities, 4)
+    results = find_top_k(data, similarities, 5)
     
     # Print the results
     print("Retrieval results:")

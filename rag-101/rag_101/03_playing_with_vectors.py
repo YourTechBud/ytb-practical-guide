@@ -32,8 +32,6 @@ def main():
     prompt_embedding = client.embeddings.create(input=prompt, model="gte-large-en-v1.5")
     print("Prompt embedding generated!")
 
-    embeddings.data
-
     # Convert the np arrays
     embeddings = np.array([item.embedding for item in embeddings.data])
     prompt_embedding = np.array(prompt_embedding.data[0].embedding)
