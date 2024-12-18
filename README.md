@@ -18,9 +18,14 @@ The repository contains reference materials for the DevOps related videos made o
 - Reference Material (for Python) - [Repo](./langgraph-101)
 - Reference Material (for Typescript) - [Repo](./langgraph-101-ts)
 
+### Pydantic AI 101
+
+- Reference Material - [Repo](./pydanticai-101)
+
 ### RAG 101
 
 - Reference Material - [Repo](./rag-101)
+- YouTube Video - [https://youtu.be/Fm2ZzS5CTP8](https://youtu.be/Fm2ZzS5CTP8) 
 
 ## Kubernetes Guides
 

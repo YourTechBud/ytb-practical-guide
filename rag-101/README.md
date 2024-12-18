@@ -2,6 +2,10 @@
 
 > Consider giving this repo a ✨! Thanks!!!
 
+Here's a link to the YouTube video explaining this setup in greater detail: 
+
+[![RAG 101](./assets/rag-101.png)](https://youtu.be/Fm2ZzS5CTP8)
+
 ## Prerequisites
 
 You need to have the following tools installed:
@@ -11,7 +15,7 @@ You need to have the following tools installed:
 
 ## Environment Setup
 
-### 1. Setup poetry & K8s Environment
+### 1. Setup poetry
 
 ```bash
 # To setup poetry
