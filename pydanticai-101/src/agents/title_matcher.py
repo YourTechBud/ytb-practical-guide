@@ -41,6 +41,6 @@ def system_prompt(ctx: RunContext[UserState]) -> str:
     return (
         "Identify the title provided by the user\n"
         f"The title must be present in this list: {titles}\n\n"
-        "Fine the title which is the closest match to the user's input\n"
+        "Find the title which is the closest match to the user's input\n"
         "If no title is present, provide an empty string and mark is_title_present as False"
     )
