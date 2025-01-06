@@ -1,10 +1,6 @@
-# Pydantic AI 101
+# Agentic RAG with Pydantic AI
 
 > Consider giving this repo a ✨! Thanks!!!
-
-Here's a link to the YouTube video explaining this setup in greater detail: 
-
-[![Pydantic AI 101](./assets/pydanticai-101.png)](https://youtu.be/ferNt5JTaGQ)
 
 ## Prerequisites
 
@@ -41,7 +37,9 @@ uv sync
 
 We've got a few scripts in this project:
 
-1. `uv run src/00_humble_call.py` - Making a simple LLM call using the `pydantic-ai` sdk.
-2. `uv run src/02_structured_responses.py` - Demonstration of how structured responses work.
-3. `uv run src/03_tool_call.py` - Demonstration of how to use tools with pydantic ai.
-4. `uv run src/04_the_real_deal.py` - A complete agentic workflow made using pydantic ai.
+1. `uv run src/00_humble_call.py` - Runs the ingestion script to create the embeddings and full text search index.
+2. `uv run src/01-basic-rag.py` - Demonstrates a basic RAG workflow.
+3. `uv run src/02a-rag-as-tool.py` - Demonstrates how you can agents can perform RAG by means of a tool call.
+4. `uv run src/02b-rag-as-system-prompt.py` - Demonstrates how you can use Pydantic AI's system prompt hook to perform RAG.
+5. `uv run src/02c-rag-combined.py` - Demonstrates how you can combine the two approaches to perform RAG.
+6. `uv run src/03-agentic-rag.py` - Demonstrates how you can use Pydantic AI's agentic workflow to perform RAG.

@@ -1,0 +1,13 @@
+[project]
+name = "agentic-rag-pydanticai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "lancedb>=0.17.0",
+    "langchain-openai>=0.2.14",
+    "langchain-text-splitters>=0.3.4",
+    "pydantic-ai-slim[openai,logfire]>=0.0.16",
+    "python-dotenv>=1.0.1",
+]
