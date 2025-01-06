@@ -27,6 +27,10 @@ The repository contains reference materials for the DevOps related videos made o
 - Reference Material - [Repo](./rag-101)
 - YouTube Video - [https://youtu.be/Fm2ZzS5CTP8](https://youtu.be/Fm2ZzS5CTP8) 
 
+### Agentic RAG
+
+- Reference Material (Using Pydantic AI) - [Repo](./agentic-rag-pydanticai)
+
 ## Kubernetes Guides
 
 ### Predictive Autoscaling with Keda & Facebook Prophet

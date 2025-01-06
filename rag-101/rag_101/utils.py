@@ -1,10 +1,11 @@
 import os
-from pydoc import text
-from re import M
+
 import numpy as np
-import tiktoken
+from langchain_text_splitters import (
+    MarkdownHeaderTextSplitter,
+    RecursiveCharacterTextSplitter,
+)
 from sklearn.metrics.pairwise import cosine_similarity
-from langchain_text_splitters import RecursiveCharacterTextSplitter, MarkdownHeaderTextSplitter
 
 
 def compute_cosine_similarity(embeddings, prompt_embedding):
@@ -69,12 +70,13 @@ def recursive_text_splitter(data, chunk_size, overlap_size):
     texts = text_splitter.create_documents(data)
     return [text.page_content for text in texts]
 
+
 def markdown_splitter(data, chunk_size, overlap_size):
     md_splitter = MarkdownHeaderTextSplitter(
         headers_to_split_on=[("#", "h1"), ("##", "h2"), ("###", "h3")],
         strip_headers=True,
     )
-    
+
     md_splits = [md_splitter.split_text(text) for text in data]
     md_splits = [split for sublist in md_splits for split in sublist]
 
@@ -88,9 +90,10 @@ def markdown_splitter(data, chunk_size, overlap_size):
 
     return prepend_metadata_to_content(text_splitter.split_documents(md_splits))
 
+
 def prepend_metadata_to_content(elements):
     """
-    Takes an array of elements and constructs a string for each element 
+    Takes an array of elements and constructs a string for each element
     by prepending metadata values (h1, h2, h3) to page_content.
 
     Args:
@@ -108,10 +111,10 @@ def prepend_metadata_to_content(elements):
 
         # Prepend h1, h2, and h3 if they exist
         parts = [
-            metadata.get('h1', ''), 
-            metadata.get('h2', ''), 
-            metadata.get('h3', ''),
-            page_content
+            metadata.get("h1", ""),
+            metadata.get("h2", ""),
+            metadata.get("h3", ""),
+            page_content,
         ]
 
         # Join non-empty parts with a space
@@ -119,6 +122,7 @@ def prepend_metadata_to_content(elements):
         result.append(combined_content)
 
     return result
+
 
 def find_top_k(strings, numbers, top_k):
     """
@@ -133,8 +137,10 @@ def find_top_k(strings, numbers, top_k):
         list of tuple: A list of (number, string) pairs sorted by the top numbers in descending order.
     """
     if len(strings) != len(numbers):
-        raise ValueError("The arrays 'strings' and 'numbers' must have the same length.")
-    
+        raise ValueError(
+            "The arrays 'strings' and 'numbers' must have the same length."
+        )
+
     # Combine strings and numbers into a list of tuples
     combined = list(zip(numbers, strings))
 
