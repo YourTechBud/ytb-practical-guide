@@ -21,6 +21,7 @@ The repository contains reference materials for the DevOps related videos made o
 ### Pydantic AI 101
 
 - Reference Material - [Repo](./pydanticai-101)
+- YouTube Video - [https://youtu.be/ferNt5JTaGQ](https://youtu.be/ferNt5JTaGQ) 
 
 ### RAG 101
 

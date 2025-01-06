@@ -2,6 +2,10 @@
 
 > Consider giving this repo a ✨! Thanks!!!
 
+Here's a link to the YouTube video explaining this setup in greater detail: 
+
+[![Pydantic AI 101](./assets/pydanticai-101.png)](https://youtu.be/ferNt5JTaGQ)
+
 ## Prerequisites
 
 You need to have the following tools installed:
