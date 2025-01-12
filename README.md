@@ -4,10 +4,14 @@ The repository contains reference materials for the DevOps related videos made o
 
 ## AI Guides
 
+### Generative AI Roadmap 2025
+
+- Reference Material - [Repo](./generative-ai-roadmap-2025/)
+
 ### AutoGen DeepDive
 
 - Reference Material - [Repo](./autogen-k8s-basic/)
-- YouTube Video - [https://youtu.be/OdmyDGjNiCY](https://youtu.be/OdmyDGjNiCY) 
+- YouTube Video - [https://youtu.be/OdmyDGjNiCY](https://youtu.be/OdmyDGjNiCY)
 
 ### Building Custom Workflows with AutoGen
 
@@ -21,12 +25,12 @@ The repository contains reference materials for the DevOps related videos made o
 ### Pydantic AI 101
 
 - Reference Material - [Repo](./pydanticai-101)
-- YouTube Video - [https://youtu.be/ferNt5JTaGQ](https://youtu.be/ferNt5JTaGQ) 
+- YouTube Video - [https://youtu.be/ferNt5JTaGQ](https://youtu.be/ferNt5JTaGQ)
 
 ### RAG 101
 
 - Reference Material - [Repo](./rag-101)
-- YouTube Video - [https://youtu.be/Fm2ZzS5CTP8](https://youtu.be/Fm2ZzS5CTP8) 
+- YouTube Video - [https://youtu.be/Fm2ZzS5CTP8](https://youtu.be/Fm2ZzS5CTP8)
 
 ### Agentic RAG
 
@@ -37,7 +41,7 @@ The repository contains reference materials for the DevOps related videos made o
 ### Predictive Autoscaling with Keda & Facebook Prophet
 
 - Reference Material - [Repo](./predictive-autoscaling/)
-- YouTube Video - [https://youtu.be/MhlkAivKkCw](https://youtu.be/MhlkAivKkCw) 
+- YouTube Video - [https://youtu.be/MhlkAivKkCw](https://youtu.be/MhlkAivKkCw)
 
 ### KubeVela Introduction
 
