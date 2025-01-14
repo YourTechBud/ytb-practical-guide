@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Buy groceries",
+    "isDone": true
+  },
+  {
+    "title": "Finish the project report",
+    "isDone": true
+  },
+  {
+    "title": "Walk the dog",
+    "isDone": false
+  },
+  {
+    "title": "Prepare dinner",
+    "isDone": true
+  },
+  {
+    "title": "Call the plumber",
+    "isDone": false
+  }
+]
