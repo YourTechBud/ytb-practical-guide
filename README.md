@@ -19,14 +19,17 @@ The repository contains reference materials for the DevOps related videos made o
 
 ### Langgraph 101
 
-- Reference Material (for Python | K8s bot) - [Repo](./langgraph-101-k8s) | [YouTube Video](https://youtu.be/fvYWMq9tLdQ)
-- Reference Material (for Python | Task Management) - [Repo](./langgraph-101-task-management)
-- Reference Material (for Typescript | Task Management) - [Repo](./langgraph-101-ts)
+- Reference Material (for Python) - [Repo](./langgraph-101-k8s) | [YouTube Video](https://youtu.be/fvYWMq9tLdQ)
+- Reference Material (for Typescript) - [Repo](./langgraph-101-ts)
 
 ### Pydantic AI 101
 
 - Reference Material - [Repo](./pydanticai-101)
 - YouTube Video - [https://youtu.be/ferNt5JTaGQ](https://youtu.be/ferNt5JTaGQ)
+
+### LangGraph + PydanticAI
+
+- Reference Material - [Repo](./langgraph-101-task-management)
 
 ### RAG 101
 
