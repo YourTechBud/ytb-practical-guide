@@ -1,0 +1,7 @@
+Write idiomatic python code. 
+
+Follow these instructions:
+- We are using uv to manage dependencies
+- We should use requests to make HTTP requests
+- use a .env file to store secrets and the dotenv library to load them
+- This project is using crawl4ai to scrape the web

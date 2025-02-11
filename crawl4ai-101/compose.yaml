@@ -1,0 +1,19 @@
+services:
+  crawl4ai:
+    image: unclecode/crawl4ai:basic-amd64
+    ports:
+      - "11235:11235"
+    environment:
+      - CRAWL4AI_API_TOKEN=crawl4ai-auth-code
+      - MAX_CONCURRENT_TASKS=5
+      # LLM Provider Keys
+      # - OPENAI_API_KEY=${OPENAI_API_KEY:-}
+      # - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}
+    volumes:
+      - /dev/shm:/dev/shm
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 1G

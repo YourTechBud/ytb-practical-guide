@@ -32,7 +32,7 @@ class FirstNode(BaseNode[None, None, str]):
         # Define the messages
         messages = [system_message, HumanMessage(content="what's up?")]
         result = await llm.ainvoke(messages)
-        return SecondNode(result.content)  # type: ignore
+        return SecondNode(result=result.content)  # type: ignore
 
 
 @dataclass

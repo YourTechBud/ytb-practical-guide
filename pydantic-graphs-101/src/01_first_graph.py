@@ -14,11 +14,6 @@ load_dotenv()
 
 
 @dataclass
-class GraphDeps:
-    userid: str
-
-
-@dataclass
 class FirstNode(BaseNode[None, None, str]):
     userid: str
 

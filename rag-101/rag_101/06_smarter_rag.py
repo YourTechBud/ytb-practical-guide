@@ -1,8 +1,14 @@
 import os
+
 import numpy as np
 from openai import OpenAI
 
-from rag_101.utils import compute_cosine_similarity, find_top_k, markdown_splitter, prepend_metadata_to_content, read_files_as_string_array, recursive_text_splitter
+from rag_101.utils import (
+    compute_cosine_similarity,
+    find_top_k,
+    markdown_splitter,
+    read_files_as_string_array,
+)
 
 # Let's start by creating an openai client
 client = OpenAI(
@@ -26,8 +32,8 @@ def main():
     print("Embeddings generated!")
 
     # Input prompt
-    prompt = "Gimme a list of Pikachu's electric attacks."
-    # prompt = "Which pokemons learn growl?"
+    # prompt = "Gimme a list of Pikachu's electric attacks which it can learn from TM."
+    prompt = "Which pokemons learn growl?"
 
     # Generate the prompt's embedding
     print("Generating prompt embedding...", prompt)
@@ -43,7 +49,7 @@ def main():
 
     # Pick out the top 5 most similar chunks
     results = find_top_k(data, similarities, 15)
-    
+
     # Print the results
     print("Retrieval results:")
     for item in results:
@@ -56,19 +62,21 @@ def main():
         print("")
 
     print("Time to call the model")
-    context = "\n---------\n".join([item[1] for item in results]) 
+    context = "\n---------\n".join([item[1] for item in results])
     prompt = f"""{prompt}
 
     Answer the user's question with the following information:
     {context}
     """
 
-
     # Call the OpenAI API
     response = client.chat.completions.create(
         model="Qwen-2.5-32B-Instruct",
         messages=[
-            {"role": "system", "content": "You are a helpful AI assistant. Give a descriptive answer to the user's question. Don't use tables in response."},
+            {
+                "role": "system",
+                "content": "You are a helpful AI assistant. Give a descriptive answer to the user's question. Don't use tables in response.",
+            },
             {"role": "user", "content": prompt},
         ],
         temperature=0.2,
