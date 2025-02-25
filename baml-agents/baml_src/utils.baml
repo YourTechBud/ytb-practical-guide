@@ -30,11 +30,11 @@ test generic_query {
   }
 }
 
-class GenericToolResponse {
+class GenericStructuredResponse {
   @@dynamic
 }
 
-function GenericToolCall(systemPrompt: string, userPrompt: string, messages: Message[]) -> GenericToolResponse{
+function GenericStructuredOutputCall(systemPrompt: string, userPrompt: string, messages: Message[]) -> GenericStructuredResponse{
   client NopeModel
 
   prompt #"
@@ -45,13 +45,14 @@ function GenericToolCall(systemPrompt: string, userPrompt: string, messages: Mes
 
     {{ ctx.output_format }}
     Give step by step reasoning before giving the final answer in JSON format.
+    Make sure to provide all fields required by the schema unless otherwise specified.
 
     {{ PrintMessages(messages) }}
   "#
 }
 
-test generic_tool_call {
-  functions [GenericToolCall]
+test generic_structured_output_call {
+  functions [GenericStructuredOutputCall]
   args {
     systemPrompt "Anwser in the voice of Pikachu."
     userPrompt "What's the capital of France?"

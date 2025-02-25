@@ -15,28 +15,29 @@ async function run(ctx: nope.Context<string>, request: string) {
     tool = await b.TaskToolComplete(request, messages);
 
     // First append the response to the message list. We might need it for retrying
-    messages.push({role: 'assistant', message: JSON.stringify(tool)});
+    messages.push({ role: 'assistant', message: JSON.stringify(tool) });
 
     // Perform checks
     if (tool.tool === 'getTasks' && !['pending', 'all'].includes(tool.filter)) {
       console.log('filter:', tool.filter);
-      messages.push({role: 'user', message: '"filter" is required when tool is "getTasks". It should be either "pending" or "all"'});
+      messages.push({ role: 'user', message: '"filter" is required when tool is "getTasks". It should be either "pending" or "all"' });
       continue;
     }
 
     if (tool.tool === 'addTask' && !tool.title) {
-      messages.push({role: 'user', message: 'addTaskArgs is required when tool is "addTask"'});
+      messages.push({ role: 'user', message: 'addTaskArgs is required when tool is "addTask"' });
       continue;
     }
 
+    console.log("Iterations:", i + 1);
     break;
   }
 
   // Throw an error if we didn't get a valid response
   if (!tool) {
-    throw new nope.Nope("Failed to get a valid response from the tool");
+    throw new nope.NopeError("Failed to get a valid response from the tool");
   }
-  
+
   // Call the tool
   switch (tool.tool) {
     case "getTasks":
@@ -56,11 +57,11 @@ async function run(ctx: nope.Context<string>, request: string) {
       console.log("Adding task:", addTask.title);
 
       // Call the new task function
-      return new nope.AgentResponse('Task added'); 
+      return new nope.AgentResponse('Task added');
     case "markTaskAsDone":
       const markTaskAsDone = tool as MarkTaskAsDone;
       console.log("MarkTaskAsDone");
-      
+
       // Call the mark task as done function
       return new nope.AgentResponse("Task marked as done");
   }
@@ -68,6 +69,6 @@ async function run(ctx: nope.Context<string>, request: string) {
 }
 
 const agent = new nope.Agent({ run });
-agent.run('Give me completed tasks', {deps: "YourTechBud"}).then((response) => {
+agent.run('Give me completed tasks', { deps: "YourTechBud" }).then((response) => {
   console.log(response.data);
 });

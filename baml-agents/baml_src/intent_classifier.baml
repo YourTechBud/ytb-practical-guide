@@ -1,5 +1,5 @@
 // Defining a data model.
-class Intent {
+class Intent2 {
   action "addTask" | "getTasks" | "markTaskAsDone" | "unknown"
 }
 

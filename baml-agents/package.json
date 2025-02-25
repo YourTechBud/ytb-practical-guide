@@ -7,7 +7,11 @@
     "generate": "baml-cli generate --from ./baml_src",
     "build": "pnpm run generate && tsc",
     "watch": "tsc --watch",
-    "01": "node dist/01-simple.js",
+    "01a": "node dist/01a-simple-baml.js",
+    "01b": "node dist/01b-chat-baml.js",
+    "02a": "node dist/02a-structured-response-baml-basic.js",
+    "02b": "node dist/02b-structured-response-baml-advanced.js",
+    "02c": "node dist/02c-structured-response.js",
     "03a": "node dist/03a-tool-call-baml-basic.js",
     "03b": "node dist/03b-tool-call-baml-complete.js",
     "03c": "node dist/03c-tool-call.js"

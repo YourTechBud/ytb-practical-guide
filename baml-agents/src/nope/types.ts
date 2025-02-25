@@ -18,8 +18,10 @@ export class AgentRequest<T> {
 
 export class AgentResponse<T> {
   data: T;
+  iterations: number;
 
-  constructor(data: T) {
+  constructor(data: T, iterations: number = 1) {
     this.data = data;
+    this.iterations = iterations;
   }
 }

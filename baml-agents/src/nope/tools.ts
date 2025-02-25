@@ -14,9 +14,14 @@ export interface ToolMetadata {
   fieldType: FieldType;
 }
 
-export class Tool<Args, Response, DepsT> {
+// Make the Response type more accessible for type inference
+export class Tool<Args, Response, DepsT = undefined> {
   fn: ToolFn<Args, Response, DepsT>;
   private schema: z.AnyZodObject;
+
+  // Add a responseType property to help with type inference
+  // This is a phantom property that only exists at compile time
+  readonly responseType!: Response;
 
   constructor(fn: ToolFn<Args, Response, DepsT>, schema: z.AnyZodObject) {
     this.fn = fn;
@@ -25,14 +30,15 @@ export class Tool<Args, Response, DepsT> {
 
   getMetadata(tb: TypeBuilder) {
     // Make sure the tool type is added to the schema
-    const finalSchema = this.schema.extend({ tool_type: z.enum([this.fn.name]) });
+    const name = this.fn.name;
+    const finalSchema = this.schema.extend({ "_tool_type": z.enum([name]).describe(this.schema.description!) });
 
-    const titleCasedName = this.fn.name.charAt(0).toUpperCase() + this.fn.name.slice(1);
+    const titleCasedName = name.charAt(0).toUpperCase() + name.slice(1);
     const jsonSchema = zodToJsonSchema(finalSchema, { name: titleCasedName, nameStrategy: 'title' });
     const fieldType = new SchemaAdder(tb, jsonSchema).parse(jsonSchema);
 
     const metadata: ToolMetadata = {
-      name: this.fn.name,
+      name: name,
       fieldType
     }
     return metadata;

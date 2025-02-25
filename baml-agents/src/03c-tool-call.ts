@@ -12,7 +12,7 @@ import { get } from "http";
  */
 
 const systemPrompt = async (ctx: nope.Context<string>) => {
-  return `Based on the user's message, return the appropriate tool to use.
+  return `Based on the user's message, return the appropriate tool to use. Only use a single tool.
   If the user has done something, mark the task as done.`;
 }
 
@@ -28,10 +28,14 @@ const userPrompt = async (ctx: nope.Context<string>, request: string) => {
  */
 
 // Get task tool
-const getTasksSchema = z.object({ filter: z.union([z.literal("all"), z.literal("pending")]) })
+const getTasksSchema = z.object({ filter: z.string().describe("Can be 'done' or 'pending'") })
   .describe("Get tasks from the database");
 
 const getTasksFromDB = async (ctx: nope.Context<string>, args: z.infer<typeof getTasksSchema>) => {
+  if (!["all", "pending"].includes(args.filter)) {
+    throw new nope.NopeRetry(`Invalid filter: '${args.filter}'. Can be 'all' or 'pending'`);
+  }
+
   if (args.filter === "all") {
     return new nope.AgentResponse(await getAllTasks(ctx.deps));
   } else {
@@ -46,7 +50,7 @@ const addTaskSchema = z.object({ title: z.string() })
 
 const addTaskToDB = async (ctx: nope.Context<string>, args: z.infer<typeof addTaskSchema>) => {
   await newTask(ctx.deps, args.title);
-  return new nope.AgentResponse('Task added');
+  return new nope.AgentResponse("Task added");
 }
 const addTaskTool = new nope.Tool(addTaskToDB, addTaskSchema)
 
@@ -68,5 +72,6 @@ clientRegistry.setPrimary("NopeModel");
 // Create an agent
 const agent = new nope.Agent({ systemPrompt, middlewares: [userPrompt], clientRegistry, tools: [getTasksTool, addTaskTool] });
 agent.run('Give me all my tasks', { deps: "YourTechBud", retries: 5 }).then((response) => {
-  console.log(response.data);
+  console.log("Iterations:", response.iterations);
+  console.log("Response:", response.data);
 });

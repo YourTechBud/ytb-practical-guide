@@ -1,4 +1,5 @@
 import * as fs from 'fs/promises'
+import * as readline from 'readline'
 
 // Path to the JSON file for storing tasks
 
@@ -68,4 +69,18 @@ const loadTasks = async (userId: string): Promise<Task[]> => {
 const saveTasks = async (userId: string, tasks: Task[]): Promise<void> => {
   const filePath = `./tasks/${userId}.json`
   await fs.writeFile(filePath, JSON.stringify(tasks, null, 2))
+}
+
+export const prompt = async (message: string): Promise<string> => {
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  return new Promise((resolve) => {
+    rl.question(message, (answer) => {
+      rl.close();
+      resolve(answer);
+    });
+  });
 }

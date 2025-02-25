@@ -91,13 +91,13 @@ export class SchemaAdder {
 
         const enumValues = jsonSchema.enum;
         if (Array.isArray(enumValues)) {
-          if (title) {
-            const enumType = this.tb.addEnum(title);
-            enumValues.forEach(value => enumType.addValue(value));
-            return enumType.type();
-          }
+            if (title) {
+                const enumType = this.tb.addEnum(title);
+                enumValues.forEach(value => enumType.addValue(value));
+                return enumType.type();
+            }
 
-          return this.tb.union(enumValues.map(value => this.tb.literalString(value)));
+            return this.tb.union(enumValues.map(value => this.tb.literalString(value)));
         }
 
         return this.tb.string();
