@@ -1,0 +1,28 @@
+{
+  "name": "baml-101",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "baml-cli generate --from ./baml_src",
+    "build": "pnpm run generate && tsc",
+    "watch": "tsc --watch",
+    "01": "node dist/01-simple.js",
+    "03a": "node dist/03a-tool-call-baml-basic.js",
+    "03b": "node dist/03b-tool-call-baml-complete.js",
+    "03c": "node dist/03c-tool-call.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@boundaryml/baml": "^0.77.0",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.2",
+    "zod-to-json-schema": "^3.24.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "typescript": "^5.7.3"
+  }
+}
