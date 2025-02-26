@@ -21,7 +21,7 @@ export class SchemaAdder {
             throw new Error("Expected type to be 'object'");
         }
 
-        const name = jsonSchema.title;
+        const name = jsonSchema.title || jsonSchema.description;
         if (!name) {
             throw new Error("Title is required in JSON schema for object type");
         }

@@ -4,7 +4,7 @@ dotenv.config();
 import * as nope from "./nope";
 import { ClientRegistry } from "@boundaryml/baml";
 import { z } from "zod";
-import { getAllTasks, getPendingTasks, newTask } from "./utils";
+import { getAllTasks, getPendingTasks, newTask, prompt } from "./utils";
 import { get } from "http";
 
 /*
@@ -56,7 +56,7 @@ const addTaskTool = new nope.Tool(addTaskToDB, addTaskSchema)
 
 
 /*
- * Define and run the agent
+ * Define agent
  */
 
 // Create a client registry
@@ -71,7 +71,17 @@ clientRegistry.setPrimary("NopeModel");
 
 // Create an agent
 const agent = new nope.Agent({ systemPrompt, middlewares: [userPrompt], clientRegistry, tools: [getTasksTool, addTaskTool] });
-agent.run('Give me all my tasks', { deps: "YourTechBud", retries: 5 }).then((response) => {
+
+/*
+ * Main function
+ */
+
+async function main() {
+  // Create an agent
+  const message = await prompt("You: ");
+  const response = await agent.run(message!, { deps: "YourTechBud", retries: 5 });
   console.log("Iterations:", response.iterations);
   console.log("Response:", response.data);
-});
+}
+
+main();

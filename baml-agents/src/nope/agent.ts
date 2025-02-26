@@ -4,6 +4,7 @@ import { AgentResponse, Context } from "./types";
 import TypeBuilder from "../baml_client/type_builder";
 import { Tool, ToolMetadata } from "./tools";
 import { NopeRetry } from "./errors";
+import { ResponseSchema } from "./structured-response";
 
 // Helper type to extract the response type from a Tool
 type ExtractToolResponseType<T> = T extends Tool<any, infer R, any> ? R : never;
@@ -19,6 +20,7 @@ export interface AgentConfig<Request = string, Response = string, DepsT = undefi
   middlewares?: ((ctx: Context<DepsT>, request: Request) => Promise<Request>)[];
   tools?: Tools;
   clientRegistry?: ClientRegistry;
+  structuredOutput?: ResponseSchema<Response, DepsT>;
 }
 
 export type AgentOptions<DepsT> = DepsT extends undefined
@@ -64,24 +66,21 @@ export class Agent<
       }
     }
 
-    if (!this.config.tools || this.config.tools.length === 0) {
+    if (this.isSimpleCall()) {
       // Request and response will both be strings if we have got to this point
       const result = await b.GenericQuery(systemPrompt, request as string, { clientRegistry: this.config.clientRegistry });
       return new AgentResponse(result as Response) as any; // Type cast needed due to conditional return type
     }
 
+    const tb = new TypeBuilder();
+    if (this.config.structuredOutput) {
+      this.setStructuredResponseField(tb);
+    } else if (this.config.tools && this.config.tools.length > 0) {
+      this.setToolResponseField(tb);
+    }
+
     const messages: Message[] = [];
     for (let i = 0; i < ctx.retries; i++) {
-      const tools: { [key: string]: ToolMetadata } = {};
-      const tb = new TypeBuilder();
-      for (const tool of this.config.tools) {
-        const metadata = tool.getMetadata(tb);
-        tools[metadata.name] = metadata;
-      }
-
-      const toolTypes = Object.values(tools).map((tool) => tool.fieldType);
-      tb.GenericStructuredResponse.addProperty("tool_call", tb.union(toolTypes));
-
       var result: GenericStructuredResponse;
       try {
         result = await b.GenericStructuredOutputCall(systemPrompt, request as string, messages, { clientRegistry: this.config.clientRegistry, tb });
@@ -96,15 +95,32 @@ export class Agent<
       }
       messages.push({ role: "assistant", message: JSON.stringify(result) });
 
+      if (this.isStructuredOutput()) {
+        try {
+          return new AgentResponse(await this.config.structuredOutput!.validate(ctx, result.response)) as any;
+        } catch (error) {
+          if (error instanceof NopeRetry) {
+            console.log("Retrying structured output:", error.message);
+            messages.push({ role: "user", message: error.message });
+            continue;
+          }
+          throw error;
+        }
+      }
+
       const toolName = result.tool_call._tool_type;
-      const tool = this.config.tools.find((tool) => tool.fn.name === toolName);
+      const tool = this.config.tools!.find((tool) => tool.name() === toolName);
       if (!tool) {
-        messages.push({ role: "user", message: `Tool '${toolName}' not found. Please select one of these tools: ${JSON.stringify(Object.keys(tools))}` });
+        const toolNames = this.config.tools!.map((tool) => tool.name());
+        messages.push({
+          role: "user",
+          message: `Tool '${toolName}' not found. Please select one of these tools: ${JSON.stringify(toolNames)}`
+        });
         continue;
       }
 
       try {
-        const response = await tool.fn(ctx, result.tool_call);
+        const response = await tool.call(ctx, result.tool_call);
         response.iterations = i + 1; // Set the number of iterations
         return response as any; // Type cast needed due to conditional return type
       } catch (error) {
@@ -118,5 +134,33 @@ export class Agent<
     }
 
     throw new Error("Max retries exceeded");
+  }
+
+  private isSimpleCall() {
+    return !this.isToolCall() && !this.isStructuredOutput();
+  }
+
+  private isToolCall() {
+    return this.config.tools && this.config.tools.length > 0;
+  }
+
+  private isStructuredOutput() {
+    return this.config.structuredOutput !== undefined;
+  }
+
+  private setStructuredResponseField(tb: TypeBuilder) {
+    const fieldType = this.config.structuredOutput!.getBamlSchema(tb);
+    tb.GenericStructuredResponse.addProperty("response", fieldType);
+  }
+
+  private setToolResponseField(tb: TypeBuilder) {
+    const tools: { [key: string]: ToolMetadata } = {};
+    for (const tool of this.config.tools!) {
+      const metadata = tool.getMetadata(tb);
+      tools[metadata.name] = metadata;
+    }
+
+    const toolTypes = Object.values(tools).map((tool) => tool.fieldType);
+    tb.GenericStructuredResponse.addProperty("tool_call", tb.union(toolTypes));
   }
 }

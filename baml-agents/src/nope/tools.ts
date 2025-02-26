@@ -16,7 +16,7 @@ export interface ToolMetadata {
 
 // Make the Response type more accessible for type inference
 export class Tool<Args, Response, DepsT = undefined> {
-  fn: ToolFn<Args, Response, DepsT>;
+  private fn: ToolFn<Args, Response, DepsT>;
   private schema: z.AnyZodObject;
 
   // Add a responseType property to help with type inference
@@ -26,6 +26,10 @@ export class Tool<Args, Response, DepsT = undefined> {
   constructor(fn: ToolFn<Args, Response, DepsT>, schema: z.AnyZodObject) {
     this.fn = fn;
     this.schema = schema;
+  }
+
+  name() {
+    return this.fn.name;
   }
 
   getMetadata(tb: TypeBuilder) {
@@ -42,5 +46,9 @@ export class Tool<Args, Response, DepsT = undefined> {
       fieldType
     }
     return metadata;
+  }
+
+  call(ctx: Context<DepsT>, args: Args) {
+    return this.fn(ctx, args);
   }
 }

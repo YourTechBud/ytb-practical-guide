@@ -3,7 +3,7 @@ dotenv.config();
 
 import { AddTask, b, GetTasks, MarkTaskAsDone, Message } from "./baml_client";
 import * as nope from "./nope";
-import { getPendingTasks, getAllTasks } from "./utils";
+import { getPendingTasks, getAllTasks, prompt } from "./utils";
 
 async function run(ctx: nope.Context<string>, request: string) {
   var tool: AddTask | GetTasks | MarkTaskAsDone | null = null;
@@ -11,7 +11,6 @@ async function run(ctx: nope.Context<string>, request: string) {
   const messages: Message[] = [];
   for (let i = 0; i < ctx.retries; i++) {
     // Call
-    console.log("Calling TaskToolComplete");
     tool = await b.TaskToolComplete(request, messages);
 
     // First append the response to the message list. We might need it for retrying
@@ -69,6 +68,11 @@ async function run(ctx: nope.Context<string>, request: string) {
 }
 
 const agent = new nope.Agent({ run });
-agent.run('Give me completed tasks', { deps: "YourTechBud" }).then((response) => {
+
+async function main() {
+  const message = await prompt("You: ");
+  const response = await agent.run(message!, { deps: "YourTechBud" });
   console.log(response.data);
-});
+}
+
+main();

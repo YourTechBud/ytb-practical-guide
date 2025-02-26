@@ -3,7 +3,7 @@ dotenv.config();
 
 import { AddTask, b, GetTasks, MarkTaskAsDone } from "./baml_client";
 import * as nope from "./nope";
-import { getPendingTasks, getAllTasks } from "./utils";
+import { getPendingTasks, getAllTasks, prompt } from "./utils";
 
 async function run(ctx: nope.Context<string>, request: string) {
   const tool = await b.TaskToolBasic(request);
@@ -25,11 +25,11 @@ async function run(ctx: nope.Context<string>, request: string) {
       console.log("Adding task:", addTask.title);
 
       // Call the new task function
-      return new nope.AgentResponse('Task added'); 
+      return new nope.AgentResponse('Task added');
     case "markTaskAsDone":
       const markTaskAsDone = tool as MarkTaskAsDone;
       console.log("MarkTaskAsDone");
-      
+
       // Call the mark task as done function
       return new nope.AgentResponse("Task marked as done");
   }
@@ -37,6 +37,11 @@ async function run(ctx: nope.Context<string>, request: string) {
 }
 
 const agent = new nope.Agent({ run });
-agent.run('Give me all my tasks', {deps: "YourTechBud"}).then((response) => {
+
+async function main() {
+  const message = await prompt("You: ");
+  const response = await agent.run(message!, { deps: "YourTechBud" });
   console.log(response.data);
-});
+}
+
+main();
