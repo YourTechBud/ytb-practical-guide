@@ -8,6 +8,10 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material - [Repo](./generative-ai-roadmap-2025/)
 
+### BAML Agents
+
+- Reference Material - [Repo](./baml-agents)
+
 ### AutoGen DeepDive
 
 - Reference Material - [Repo](./autogen-k8s-basic/)
