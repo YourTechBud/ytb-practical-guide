@@ -1,7 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import { b, Message } from "./baml_client";
 import * as nope from "./nope";
 import { prompt } from "./utils";
 import { z } from "zod";

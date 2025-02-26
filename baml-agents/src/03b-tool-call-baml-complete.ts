@@ -18,7 +18,6 @@ async function run(ctx: nope.Context<string>, request: string) {
 
     // Perform checks
     if (tool.tool === 'getTasks' && !['pending', 'all'].includes(tool.filter)) {
-      console.log('filter:', tool.filter);
       messages.push({ role: 'user', message: '"filter" is required when tool is "getTasks". It should be either "pending" or "all"' });
       continue;
     }
@@ -64,7 +63,6 @@ async function run(ctx: nope.Context<string>, request: string) {
       // Call the mark task as done function
       return new nope.AgentResponse("Task marked as done");
   }
-
 }
 
 const agent = new nope.Agent({ run });

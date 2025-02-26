@@ -35,7 +35,7 @@ export class Tool<Args, Response, DepsT = undefined> {
   getMetadata(tb: TypeBuilder) {
     // Make sure the tool type is added to the schema
     const name = this.fn.name;
-    const finalSchema = this.schema.extend({ "_tool_type": z.enum([name]).describe(this.schema.description!) });
+    const finalSchema = this.schema.extend({ "tool_type": z.enum([name]).describe(this.schema.description!) });
 
     const titleCasedName = name.charAt(0).toUpperCase() + name.slice(1);
     const jsonSchema = zodToJsonSchema(finalSchema, { name: titleCasedName, nameStrategy: 'title' });

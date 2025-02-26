@@ -15,6 +15,7 @@ async function main() {
 
   const message = await prompt("You: ");
   const response = await agent.run(message, {});
+
   console.log(`Assistant: ${JSON.stringify(response.data, null, 2)}`);
 }
 

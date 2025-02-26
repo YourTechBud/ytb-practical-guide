@@ -5,7 +5,6 @@ import * as nope from "./nope";
 import { ClientRegistry } from "@boundaryml/baml";
 import { z } from "zod";
 import { getAllTasks, getPendingTasks, newTask, prompt } from "./utils";
-import { get } from "http";
 
 /*
  * Define the prompts
@@ -49,8 +48,10 @@ const addTaskSchema = z.object({ title: z.string() })
   .describe("Add a new task to the database");
 
 const addTaskToDB = async (ctx: nope.Context<string>, args: z.infer<typeof addTaskSchema>) => {
-  await newTask(ctx.deps, args.title);
-  return new nope.AgentResponse("Task added");
+  const userId = ctx.deps;
+
+  await newTask(userId, args.title);
+  return new nope.AgentResponse(1);
 }
 const addTaskTool = new nope.Tool(addTaskToDB, addTaskSchema)
 

@@ -97,7 +97,7 @@ export class Agent<
 
       if (this.isStructuredOutput()) {
         try {
-          return new AgentResponse(await this.config.structuredOutput!.validate(ctx, result.response)) as any;
+          return new AgentResponse(await this.config.structuredOutput!.validate(ctx, result.response), i + 1) as any;
         } catch (error) {
           if (error instanceof NopeRetry) {
             console.log("Retrying structured output:", error.message);
@@ -108,7 +108,7 @@ export class Agent<
         }
       }
 
-      const toolName = result.tool_call._tool_type;
+      const toolName = result.tool_call.tool_type;
       const tool = this.config.tools!.find((tool) => tool.name() === toolName);
       if (!tool) {
         const toolNames = this.config.tools!.map((tool) => tool.name());

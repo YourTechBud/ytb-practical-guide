@@ -1,5 +1,5 @@
 class IntentAddTask {
-  intent "addTasks" @description("The user wants to do something add a task to the list.")
+  intent "addTasks" @description("The user wants to or needs to do something or add a task to the list.")
   taskTitle string 
 }
 
@@ -34,4 +34,12 @@ function ClassifyIntentAdvanced(user_message: string, messages: Message[]) -> In
 
     {{ PrintMessages(messages) }}
   "#
+}
+
+test classify_intent_advanced {
+  functions [ClassifyIntentAdvanced]
+  args {
+    user_message "I need to study how to use BAML to build a Graph based Knowledge Base"
+    messages []
+  }
 }
