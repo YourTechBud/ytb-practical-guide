@@ -2,6 +2,6 @@ servers:
   - name: task-manager
     url: http://localhost:8010/sse
     api_key: secret-key1
-  # - name: calendar
-  #   url: http://localhost:8020/sse
-  #   api_key: secret-key2
+  - name: calendar
+    url: http://localhost:8020/sse
+    api_key: secret-key2

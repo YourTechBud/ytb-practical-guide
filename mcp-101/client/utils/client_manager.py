@@ -51,7 +51,8 @@ class ClientManager:
 
     async def cleanup(self):
         """Cleanup all clients"""
-        for client in self.clients:
+        # Clean up all clients in reverse order
+        for client in reversed(self.clients):
             await client.cleanup()
 
     def _add_server(self, name: str, server_url: str, api_key: str):

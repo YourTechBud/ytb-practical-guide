@@ -22,9 +22,10 @@ async def main():
 
     # Create a chat completion
     # Assuming ChatCompletionToolParam is a class
+    query = input("Enter a query: ")
     response = client.chat.completions.create(
         model=model,
-        messages=[{"role": "user", "content": "Add task: I want to write a blog post"}],
+        messages=[{"role": "user", "content": f"User's query: {query}"}],
         tools=client_manager.tools,
         tool_choice="auto",
         temperature=0.0,

@@ -1,12 +1,8 @@
-from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
 from utils.starlette import create_starlette_app
 from utils.tasks import add_task as add_task_to_file
 from utils.tasks import mark_task_as_done as mark_task_as_done_in_file
 from utils.tasks import read_tasks
-
-load_dotenv()
-
 
 mcp = FastMCP("Task Manager")
 
