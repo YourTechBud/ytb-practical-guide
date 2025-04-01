@@ -1,0 +1,14 @@
+[project]
+name = "mcp-101"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "openai>=1.70.0",
+    "python-dotenv>=1.1.0",
+    "pyyaml>=6.0.2",
+    "starlette>=0.46.1",
+    "uvicorn>=0.34.0",
+]
