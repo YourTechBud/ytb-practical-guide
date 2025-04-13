@@ -46,7 +46,7 @@ The repository contains reference materials for the DevOps related videos made o
 
 ### Building Agents using MCP
 
-- Reference Material - [Repo](./mcp-101)
+- Reference Material - [Repo](./building-agents-with-mcp)
 - YouTube Video - [https://youtu.be/9izHUWherYw](https://youtu.be/9izHUWherYw)
 
 ## Kubernetes Guides
