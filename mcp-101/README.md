@@ -1,4 +1,4 @@
-# Pydantic Graph 101
+# Building Agents With MCP
 
 > Consider giving this repo a ✨! Thanks!!!
 
