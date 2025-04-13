@@ -44,6 +44,11 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material (Using Pydantic AI) - [Repo](./agentic-rag-pydanticai)
 
+### Building Agents using MCP
+
+- Reference Material - [Repo](./mcp-101)
+- YouTube Video - [https://youtu.be/9izHUWherYw](https://youtu.be/9izHUWherYw)
+
 ## Kubernetes Guides
 
 ### Predictive Autoscaling with Keda & Facebook Prophet
