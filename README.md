@@ -12,14 +12,9 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material - [Repo](./baml-agents)
 
-### AutoGen DeepDive
+### Multi-Agent System with Google ADK
 
-- Reference Material - [Repo](./autogen-k8s-basic/)
-- YouTube Video - [https://youtu.be/OdmyDGjNiCY](https://youtu.be/OdmyDGjNiCY)
-
-### Building Custom Workflows with AutoGen
-
-- Reference Material - [Repo](./autogen-workflows/)
+- Reference Material - [Repo](./adk-multi-agent/)
 
 ### Langgraph 101
 
@@ -34,6 +29,15 @@ The repository contains reference materials for the DevOps related videos made o
 ### LangGraph + PydanticAI
 
 - Reference Material - [Repo](./langgraph-101-task-management)
+
+### AutoGen DeepDive
+
+- Reference Material - [Repo](./autogen-k8s-basic/)
+- YouTube Video - [https://youtu.be/OdmyDGjNiCY](https://youtu.be/OdmyDGjNiCY)
+
+### Building Custom Workflows with AutoGen
+
+- Reference Material - [Repo](./autogen-workflows/)
 
 ### RAG 101
 

@@ -22,11 +22,19 @@ from .globals import DO_NOT_USE_DIRECTLY_UNLESS_YOU_KNOW_WHAT_YOURE_DOING_RUNTIM
 class TypeBuilder(_TypeBuilder):
     def __init__(self):
         super().__init__(classes=set(
-          ["AssistantActionAgent","AssistantActionEnd","AssistantActionInputRequired","CalendarActionEnd","CalendarActionInputRequired","CalendarActionToolCall","CalendarAgent","CalendarListEventsTool","CalendarListEventsToolArgs","CalendarScheduleEventTool","CalendarScheduleEventToolArgs","ProjectAgent",]
+          ["AgentActionEnd","AgentActionInputRequired","AssistantActionAgent","AssistantActionEnd","AssistantActionInputRequired","CalendarActionEnd","CalendarActionInputRequired","CalendarActionToolCall","CalendarAgent","CalendarListEventsTool","CalendarListEventsToolArgs","CalendarScheduleEventTool","CalendarScheduleEventToolArgs","ProjectAgent","ProjectManagerActionToolCall","ProjectManagerGetProjectTasksTool","ProjectManagerGetProjectTasksToolArgs","ProjectManagerListProjectsTool",]
         ), enums=set(
           ["AgentName",]
         ), runtime=DO_NOT_USE_DIRECTLY_UNLESS_YOU_KNOW_WHAT_YOURE_DOING_RUNTIME)
 
+
+    @property
+    def AgentActionEnd(self) -> "AgentActionEndAst":
+        return AgentActionEndAst(self)
+
+    @property
+    def AgentActionInputRequired(self) -> "AgentActionInputRequiredAst":
+        return AgentActionInputRequiredAst(self)
 
     @property
     def AssistantActionAgent(self) -> "AssistantActionAgentAst":
@@ -76,6 +84,22 @@ class TypeBuilder(_TypeBuilder):
     def ProjectAgent(self) -> "ProjectAgentAst":
         return ProjectAgentAst(self)
 
+    @property
+    def ProjectManagerActionToolCall(self) -> "ProjectManagerActionToolCallAst":
+        return ProjectManagerActionToolCallAst(self)
+
+    @property
+    def ProjectManagerGetProjectTasksTool(self) -> "ProjectManagerGetProjectTasksToolAst":
+        return ProjectManagerGetProjectTasksToolAst(self)
+
+    @property
+    def ProjectManagerGetProjectTasksToolArgs(self) -> "ProjectManagerGetProjectTasksToolArgsAst":
+        return ProjectManagerGetProjectTasksToolArgsAst(self)
+
+    @property
+    def ProjectManagerListProjectsTool(self) -> "ProjectManagerListProjectsToolAst":
+        return ProjectManagerListProjectsToolAst(self)
+
 
 
 
@@ -84,6 +108,90 @@ class TypeBuilder(_TypeBuilder):
         return AgentNameBuilder(self)
 
 
+
+class AgentActionEndAst:
+    def __init__(self, tb: _TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("AgentActionEnd")
+        self._properties: typing.Set[str] = set([ "action",  "result", ])
+        self._props = AgentActionEndProperties(self._bldr, self._properties)
+
+    def type(self) -> FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "AgentActionEndProperties":
+        return self._props
+
+
+class AgentActionEndViewer(AgentActionEndAst):
+    def __init__(self, tb: _TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, ClassPropertyViewer]]:
+        return [(name, ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+
+
+
+class AgentActionEndProperties:
+    def __init__(self, bldr: ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties
+
+    
+
+    @property
+    def action(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("action"))
+
+    @property
+    def result(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("result"))
+
+    
+
+class AgentActionInputRequiredAst:
+    def __init__(self, tb: _TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("AgentActionInputRequired")
+        self._properties: typing.Set[str] = set([ "action",  "prompt", ])
+        self._props = AgentActionInputRequiredProperties(self._bldr, self._properties)
+
+    def type(self) -> FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "AgentActionInputRequiredProperties":
+        return self._props
+
+
+class AgentActionInputRequiredViewer(AgentActionInputRequiredAst):
+    def __init__(self, tb: _TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, ClassPropertyViewer]]:
+        return [(name, ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+
+
+
+class AgentActionInputRequiredProperties:
+    def __init__(self, bldr: ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties
+
+    
+
+    @property
+    def action(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("action"))
+
+    @property
+    def prompt(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("prompt"))
+
+    
 
 class AssistantActionAgentAst:
     def __init__(self, tb: _TypeBuilder):
@@ -598,6 +706,166 @@ class ProjectAgentProperties:
     @property
     def query(self) -> ClassPropertyViewer:
         return ClassPropertyViewer(self.__bldr.property("query"))
+
+    
+
+class ProjectManagerActionToolCallAst:
+    def __init__(self, tb: _TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("ProjectManagerActionToolCall")
+        self._properties: typing.Set[str] = set([ "action",  "tool", ])
+        self._props = ProjectManagerActionToolCallProperties(self._bldr, self._properties)
+
+    def type(self) -> FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "ProjectManagerActionToolCallProperties":
+        return self._props
+
+
+class ProjectManagerActionToolCallViewer(ProjectManagerActionToolCallAst):
+    def __init__(self, tb: _TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, ClassPropertyViewer]]:
+        return [(name, ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+
+
+
+class ProjectManagerActionToolCallProperties:
+    def __init__(self, bldr: ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties
+
+    
+
+    @property
+    def action(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("action"))
+
+    @property
+    def tool(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("tool"))
+
+    
+
+class ProjectManagerGetProjectTasksToolAst:
+    def __init__(self, tb: _TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("ProjectManagerGetProjectTasksTool")
+        self._properties: typing.Set[str] = set([ "name",  "args", ])
+        self._props = ProjectManagerGetProjectTasksToolProperties(self._bldr, self._properties)
+
+    def type(self) -> FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "ProjectManagerGetProjectTasksToolProperties":
+        return self._props
+
+
+class ProjectManagerGetProjectTasksToolViewer(ProjectManagerGetProjectTasksToolAst):
+    def __init__(self, tb: _TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, ClassPropertyViewer]]:
+        return [(name, ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+
+
+
+class ProjectManagerGetProjectTasksToolProperties:
+    def __init__(self, bldr: ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties
+
+    
+
+    @property
+    def name(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("name"))
+
+    @property
+    def args(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("args"))
+
+    
+
+class ProjectManagerGetProjectTasksToolArgsAst:
+    def __init__(self, tb: _TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("ProjectManagerGetProjectTasksToolArgs")
+        self._properties: typing.Set[str] = set([ "project_id", ])
+        self._props = ProjectManagerGetProjectTasksToolArgsProperties(self._bldr, self._properties)
+
+    def type(self) -> FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "ProjectManagerGetProjectTasksToolArgsProperties":
+        return self._props
+
+
+class ProjectManagerGetProjectTasksToolArgsViewer(ProjectManagerGetProjectTasksToolArgsAst):
+    def __init__(self, tb: _TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, ClassPropertyViewer]]:
+        return [(name, ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+
+
+
+class ProjectManagerGetProjectTasksToolArgsProperties:
+    def __init__(self, bldr: ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties
+
+    
+
+    @property
+    def project_id(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("project_id"))
+
+    
+
+class ProjectManagerListProjectsToolAst:
+    def __init__(self, tb: _TypeBuilder):
+        _tb = tb._tb # type: ignore (we know how to use this private attribute)
+        self._bldr = _tb.class_("ProjectManagerListProjectsTool")
+        self._properties: typing.Set[str] = set([ "name", ])
+        self._props = ProjectManagerListProjectsToolProperties(self._bldr, self._properties)
+
+    def type(self) -> FieldType:
+        return self._bldr.field()
+
+    @property
+    def props(self) -> "ProjectManagerListProjectsToolProperties":
+        return self._props
+
+
+class ProjectManagerListProjectsToolViewer(ProjectManagerListProjectsToolAst):
+    def __init__(self, tb: _TypeBuilder):
+        super().__init__(tb)
+
+    
+    def list_properties(self) -> typing.List[typing.Tuple[str, ClassPropertyViewer]]:
+        return [(name, ClassPropertyViewer(self._bldr.property(name))) for name in self._properties]
+
+
+
+class ProjectManagerListProjectsToolProperties:
+    def __init__(self, bldr: ClassBuilder, properties: typing.Set[str]):
+        self.__bldr = bldr
+        self.__properties = properties
+
+    
+
+    @property
+    def name(self) -> ClassPropertyViewer:
+        return ClassPropertyViewer(self.__bldr.property("name"))
 
     
 

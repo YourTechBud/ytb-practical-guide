@@ -89,6 +89,35 @@ class LlmResponseParser:
 
       return cast(Union[_baml.types.CalendarActionToolCall, _baml.types.CalendarActionEnd, _baml.types.CalendarActionInputRequired], parsed)
     
+    def ProjectManagerNextAction(
+        self,
+        llm_response: str,
+        baml_options: _baml.BamlCallOptionsModApi = {},
+    ) -> Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired]:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      env = _baml.env_vars_to_dict(baml_options.get("env", {}))
+
+      parsed = self.__runtime.parse_llm_response(
+        "ProjectManagerNextAction",
+        llm_response,
+        _baml.types,
+        _baml.types,
+        _baml.partial_types,
+        False,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        env,
+      )
+
+      return cast(Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired], parsed)
+    
 
 
 class LlmStreamParser:
@@ -157,6 +186,35 @@ class LlmStreamParser:
       )
 
       return cast(Optional[Union[_baml.partial_types.CalendarActionToolCall, _baml.partial_types.CalendarActionEnd, _baml.partial_types.CalendarActionInputRequired]], parsed)
+    
+    def ProjectManagerNextAction(
+        self,
+        llm_response: str,
+        baml_options: _baml.BamlCallOptionsModApi = {},
+    ) -> Optional[Union[_baml.partial_types.ProjectManagerActionToolCall, _baml.partial_types.AgentActionEnd, _baml.partial_types.AgentActionInputRequired]]:
+      __tb__ = baml_options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = baml_options.get("client_registry", None)
+
+      env = _baml.env_vars_to_dict(baml_options.get("env", {}))
+
+      parsed = self.__runtime.parse_llm_response(
+        "ProjectManagerNextAction",
+        llm_response,
+        _baml.types,
+        _baml.types,
+        _baml.partial_types,
+        True,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        env,
+      )
+
+      return cast(Optional[Union[_baml.partial_types.ProjectManagerActionToolCall, _baml.partial_types.AgentActionEnd, _baml.partial_types.AgentActionInputRequired]], parsed)
     
 
 

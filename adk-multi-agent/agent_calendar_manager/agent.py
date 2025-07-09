@@ -1,3 +1,4 @@
+from operator import call
 import uuid
 from datetime import datetime
 from typing import Optional
@@ -6,7 +7,7 @@ from google.adk.agents import Agent
 from google.adk.agents.callback_context import CallbackContext
 from google.adk.models.llm_request import LlmRequest
 from google.adk.models.llm_response import LlmResponse
-from google.genai.types import ModelContent, Part
+from google.genai.types import Content
 
 from baml_client.async_client import b
 
@@ -140,56 +141,20 @@ def schedule_event(title: str, time_start: str, time_end: str) -> dict:
     return {"status": "success", "event": new_event}
 
 
-async def before_model_callback(
-    callback_context: CallbackContext, llm_request: LlmRequest
-) -> Optional[LlmResponse]:
-    context = ""
+async def before_agent_callback(
+    callback_context: CallbackContext
+) -> Optional[Content]:
+    # TODO: Get this from user preferences db
+    user_preferences = "Always ask for confirmation before scheduling an event with a very high effort. Only schedule events during weekdays. All meeetings should be during first 4 hours of the day."
 
-    for content in llm_request.contents:
-        if not content.parts:
-            continue
+    # TODO: Set the real date here
+    date_today = "2025-06-23 Monday, 12 AM"
 
-        for part in content.parts:
-            if part.text:
-                context += f"{content.role}: {part.text}\n\n"
-                continue
+    # Update the state object
+    callback_context.state["user_preferences"] = user_preferences
+    callback_context.state["date_today"] = date_today
 
-            if (
-                part.function_response
-                and part.function_response.name != "transfer_to_agent"
-            ):
-                context += f"{content.role}: {part.function_response.response}\n\n"
-
-    # Fire BAML request
-    baml_response = await b.CalendarNextAction(
-        context=context,
-        additional_instructions="Always ask for confirmation before scheduling an event with a very high effort. Only schedule events during weekdays.",
-        date_today="Monday, 23rd June 2025",
-    )
-
-    if baml_response.action == "tool_call":
-        return LlmResponse(
-            content=ModelContent(
-                parts=[
-                    Part.from_function_call(
-                        name=baml_response.tool.tool,
-                        args=baml_response.tool.args.model_dump(),
-                    )
-                ]
-            )
-        )
-
-    if baml_response.action == "end":
-        return LlmResponse(
-            content=ModelContent(parts=[Part.from_text(text=baml_response.answer)])
-        )
-
-    if baml_response.action == "input_required":
-        callback_context.state["input_required"] = True
-        callback_context.state["input_required_prompt"] = baml_response.prompt
-        return LlmResponse(
-            content=ModelContent(parts=[Part.from_text(text=baml_response.prompt)])
-        )
+    print(f"State: {callback_context.state}")
 
     return None
 
@@ -204,7 +169,31 @@ root_agent = Agent(
         "- Schedule all these events: [List of events]\n"
         "- List all events for the next 7 days.\n"
     ),
-    instruction="You are a helpful agent who can list and schedule calendar events.",
+    instruction="""You are a helpful agent who can list and schedule calendar events.
+    # Instructions
+    - We are not allowed to schedule events in the past.
+    - Once the user's request is complete, you should end the conversation with an answer. The answer should be in a human readable markdown format.
+    - Suggest time to schedule events based on the user's preferences if not specified.
+    - Pay special attention to the user's preferences. User may provide additional instructions in the User preferences section.
+    - Always list events for the next few days before to make sure we avoid duplicates and conflicts.
+
+    # Effort Mapping
+    - very-high: 4 hours or more
+    - high: 2 hours or more
+    - medium: 1 hour or more
+    - low: 30 minutes or more
+    - very-low: less than 30 minutes
+
+    # Today's date
+    {date_today}
+    
+    # User preferences
+    {user_preferences}\
+    
+    # Output format
+    - Make sure the output is in a human readable markdown format.
+    - Make sure all dates are properly formatted in human readable format.
+    """,
+    before_agent_callback=before_agent_callback,
     tools=[list_events, schedule_event],
-    before_model_callback=before_model_callback,
 )

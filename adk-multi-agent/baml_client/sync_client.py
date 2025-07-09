@@ -150,6 +150,34 @@ class BamlSyncClient:
       )
       return cast(Union[_baml.types.CalendarActionToolCall, _baml.types.CalendarActionEnd, _baml.types.CalendarActionInputRequired], raw.cast_to(_baml.types, _baml.types, _baml.partial_types, False))
     
+    def ProjectManagerNextAction(
+        self,
+        context: str,
+        baml_options: _baml.BamlCallOptions = {},
+    ) -> Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired]:
+      options: _baml.BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+      env = _baml.env_vars_to_dict(options.get("env", {}))
+      raw = self.__runtime.call_function_sync(
+        "ProjectManagerNextAction",
+        {
+          "context": context,
+        },
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+        env,
+      )
+      return cast(Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired], raw.cast_to(_baml.types, _baml.types, _baml.partial_types, False))
+    
 
 
 
@@ -232,6 +260,41 @@ class BamlStreamClient:
         raw,
         lambda x: cast(Optional[Union[_baml.partial_types.CalendarActionToolCall, _baml.partial_types.CalendarActionEnd, _baml.partial_types.CalendarActionInputRequired]], x.cast_to(_baml.types, _baml.types, _baml.partial_types, True)),
         lambda x: cast(Union[_baml.types.CalendarActionToolCall, _baml.types.CalendarActionEnd, _baml.types.CalendarActionInputRequired], x.cast_to(_baml.types, _baml.types, _baml.partial_types, False)),
+        self.__ctx_manager.get(),
+      )
+    
+    def ProjectManagerNextAction(
+        self,
+        context: str,
+        baml_options: _baml.BamlCallOptions = {},
+    ) -> baml_py.BamlSyncStream[Optional[Union[_baml.partial_types.ProjectManagerActionToolCall, _baml.partial_types.AgentActionEnd, _baml.partial_types.AgentActionInputRequired]], Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired]]:
+      options: _baml.BamlCallOptions = {**self.__baml_options, **(baml_options or {})}
+      __tb__ = options.get("tb", None)
+      if __tb__ is not None:
+        tb = __tb__._tb # type: ignore (we know how to use this private attribute)
+      else:
+        tb = None
+      __cr__ = options.get("client_registry", None)
+      collector = options.get("collector", None)
+      collectors = collector if isinstance(collector, list) else [collector] if collector is not None else []
+      env = _baml.env_vars_to_dict(options.get("env", {}))
+      raw = self.__runtime.stream_function_sync(
+        "ProjectManagerNextAction",
+        {
+          "context": context,
+        },
+        None,
+        self.__ctx_manager.get(),
+        tb,
+        __cr__,
+        collectors,
+        env,
+      )
+
+      return baml_py.BamlSyncStream[Optional[Union[_baml.partial_types.ProjectManagerActionToolCall, _baml.partial_types.AgentActionEnd, _baml.partial_types.AgentActionInputRequired]], Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired]](
+        raw,
+        lambda x: cast(Optional[Union[_baml.partial_types.ProjectManagerActionToolCall, _baml.partial_types.AgentActionEnd, _baml.partial_types.AgentActionInputRequired]], x.cast_to(_baml.types, _baml.types, _baml.partial_types, True)),
+        lambda x: cast(Union[_baml.types.ProjectManagerActionToolCall, _baml.types.AgentActionEnd, _baml.types.AgentActionInputRequired], x.cast_to(_baml.types, _baml.types, _baml.partial_types, False)),
         self.__ctx_manager.get(),
       )
     

@@ -1,5 +1,13 @@
-from google.adk.agents import Agent
+from typing import Optional, Union, Any
 
+from google.adk.agents import Agent
+from google.adk.agents.callback_context import CallbackContext
+from google.adk.models.llm_request import LlmRequest
+from google.adk.models.llm_response import LlmResponse
+from google.genai.types import ModelContent, Part
+
+from baml_client.async_client import b
+from baml_client.types import ProjectManagerGetProjectTasksTool, ProjectManagerListProjectsTool, AgentActionEnd, AgentActionInputRequired, ProjectManagerActionToolCall
 
 def list_all_projects() -> dict:
     """Returns a list of all available projects.
@@ -107,6 +115,63 @@ def get_project_tasks(project_id: str) -> dict:
             "error_message": f"Tasks for project '{project_id}' not found.",
         }
 
+async def before_model_callback(
+    callback_context: CallbackContext, llm_request: LlmRequest
+) -> Optional[LlmResponse]:
+    context = ""
+
+    for content in llm_request.contents:
+        if not content.parts:
+            continue
+
+        for part in content.parts:
+            if part.text:
+                context += f"{content.role}: {part.text}\n\n"
+                continue
+
+            if (
+                part.function_response
+                and part.function_response.name != "transfer_to_agent"
+            ):
+                context += f"{content.role}: {part.function_response.response}\n\n"
+
+    # Fire BAML request
+    baml_response = await b.ProjectManagerNextAction(
+        context=context,
+    )
+
+    if isinstance(baml_response, ProjectManagerActionToolCall):
+        print(f"Tool call: {baml_response.tool}")
+        tool_args: dict[str, Any] = {}
+        if isinstance(baml_response.tool, ProjectManagerGetProjectTasksTool):
+            tool_args = baml_response.tool.args.model_dump()
+        
+        function_call_parts = []
+        function_call_parts.append(Part.from_function_call(
+            name=baml_response.tool.name,
+            args=tool_args,
+        ))
+
+        return LlmResponse(
+            content=ModelContent(
+                parts=function_call_parts
+            )
+        )
+
+    if isinstance(baml_response, AgentActionEnd):
+        return LlmResponse(
+            content=ModelContent(parts=[Part.from_text(text=baml_response.result)])
+        )
+
+    if isinstance(baml_response, AgentActionInputRequired):
+        callback_context.state["input_required"] = True
+        callback_context.state["input_required_prompt"] = baml_response.prompt
+        return LlmResponse(
+            content=ModelContent(parts=[Part.from_text(text=baml_response.prompt)])
+        )
+
+    return None
+
 
 root_agent = Agent(
     name="project_manager",
@@ -121,5 +186,6 @@ root_agent = Agent(
         "Try to break down the tasks into smaller steps if needed.\n\n"
         "Always provide the output in human readable markdown format. Include all the information in the output."
     ),
+    before_model_callback=before_model_callback,
     tools=[list_all_projects, get_project_tasks],
 )

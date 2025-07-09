@@ -44,6 +44,14 @@ def all_succeeded(checks: Dict[CheckName, Check]) -> bool:
 class AgentName(str, Enum):
     pass
 
+class AgentActionEnd(BaseModel):
+    action: Literal["end"]
+    result: str
+
+class AgentActionInputRequired(BaseModel):
+    action: Literal["input_required"]
+    prompt: str
+
 class AssistantActionAgent(BaseModel):
     action: Literal["transfer_to_agent"]
     agent: Union["AgentName", str]
@@ -94,3 +102,17 @@ class CalendarScheduleEventToolArgs(BaseModel):
 class ProjectAgent(BaseModel):
     agent_name: Literal["project_manager"]
     query: str
+
+class ProjectManagerActionToolCall(BaseModel):
+    action: Literal["tool_call"]
+    tool: Union["ProjectManagerListProjectsTool", "ProjectManagerGetProjectTasksTool"]
+
+class ProjectManagerGetProjectTasksTool(BaseModel):
+    name: Literal["get_project_tasks"]
+    args: "ProjectManagerGetProjectTasksToolArgs"
+
+class ProjectManagerGetProjectTasksToolArgs(BaseModel):
+    project_id: str
+
+class ProjectManagerListProjectsTool(BaseModel):
+    name: Literal["list_all_projects"]

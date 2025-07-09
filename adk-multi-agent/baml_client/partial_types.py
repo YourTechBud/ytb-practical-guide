@@ -37,6 +37,14 @@ class StreamState(BaseModel, Generic[T]):
     state: Literal["Pending", "Incomplete", "Complete"]
 
 
+class AgentActionEnd(BaseModel):
+    action: Optional[Literal["end"]] = None
+    result: Optional[str] = None
+
+class AgentActionInputRequired(BaseModel):
+    action: Optional[Literal["input_required"]] = None
+    prompt: Optional[str] = None
+
 class AssistantActionAgent(BaseModel):
     action: Optional[Literal["transfer_to_agent"]] = None
     agent: Optional[Union[types.AgentName, str]] = None
@@ -87,3 +95,17 @@ class CalendarScheduleEventToolArgs(BaseModel):
 class ProjectAgent(BaseModel):
     agent_name: Optional[Literal["project_manager"]] = None
     query: Optional[str] = None
+
+class ProjectManagerActionToolCall(BaseModel):
+    action: Optional[Literal["tool_call"]] = None
+    tool: Optional[Union["ProjectManagerListProjectsTool", "ProjectManagerGetProjectTasksTool"]] = None
+
+class ProjectManagerGetProjectTasksTool(BaseModel):
+    name: Optional[Literal["get_project_tasks"]] = None
+    args: Optional["ProjectManagerGetProjectTasksToolArgs"] = None
+
+class ProjectManagerGetProjectTasksToolArgs(BaseModel):
+    project_id: Optional[str] = None
+
+class ProjectManagerListProjectsTool(BaseModel):
+    name: Optional[Literal["list_all_projects"]] = None
