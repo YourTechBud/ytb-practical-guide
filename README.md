@@ -8,9 +8,10 @@ The repository contains reference materials for the DevOps related videos made o
 
 - Reference Material - [Repo](./generative-ai-roadmap-2025/)
 
-### BAML Agents
+### Building custom agents with BAML
 
 - Reference Material - [Repo](./baml-agents)
+- YouTube Video - [https://youtu.be/Li4C1c0szmc](https://youtu.be/Li4C1c0szmc)
 
 ### Multi-Agent System with Google ADK
 
@@ -29,6 +30,12 @@ The repository contains reference materials for the DevOps related videos made o
 ### LangGraph + PydanticAI
 
 - Reference Material - [Repo](./langgraph-101-task-management)
+- YouTube Video - [https://youtu.be/P3qH5GVIxD0](https://youtu.be/P3qH5GVIxD0)
+
+### PydanticGraph 101
+
+- Reference Material - [Repo](./pydantic-graphs-101/)
+- YouTube Video - [https://youtu.be/ePp7Gq2bJjE](https://youtu.be/ePp7Gq2bJjE)
 
 ### AutoGen DeepDive
 

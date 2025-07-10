@@ -2,6 +2,10 @@
 
 > Consider giving this repo a ✨! Thanks!!!
 
+Here's a link to the YouTube video explaining this setup in greater detail:
+
+[![PydanticAI + Langgraph: The Ultimate Match for Smarter AI Agents!](./assets/thumbnail.png)](https://youtu.be/P3qH5GVIxD0)
+
 ## Prerequisites
 
 You need to have the following tools installed:

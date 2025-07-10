@@ -2,6 +2,10 @@
 
 > Consider giving this repo a ✨! Thanks!!!
 
+Here's a link to the YouTube video explaining this setup in greater detail:
+
+[![Inside Pydantic Graph: A Deep Dive with Code](./assets/Thumbnail.svg)](https://youtu.be/ePp7Gq2bJjE)
+
 ## Prerequisites
 
 You need to have the following tools installed:
