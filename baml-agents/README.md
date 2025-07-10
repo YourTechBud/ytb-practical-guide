@@ -4,6 +4,10 @@
 
 This project introduces a new agentic framework - **Not Overengineered and Probably Erroneous Agents** OR **NOPE Agents**.
 
+Here's a link to the YouTube video explaining this setup in greater detail:
+
+[![PydanticAI Isn’t Enough—Time To Build Your Own Agents!](./assets/Thumbnail.png)](https://youtu.be/Li4C1c0szmc)
+
 ## Prerequisites
 
 You need to have the following tools installed:
