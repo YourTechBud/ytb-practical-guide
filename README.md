@@ -4,90 +4,44 @@ The repository contains reference materials for the DevOps related videos made o
 
 ## AI Guides
 
-### Generative AI Roadmap 2025
+| Guide Name                 | Reference Material                    | YouTube Video                                                |
+| -------------------------- | ------------------------------------- | ------------------------------------------------------------ |
+| Generative AI Roadmap 2025 | [Repo](./generative-ai-roadmap-2025/) | [https://youtu.be/e6VptUfmMNE](https://youtu.be/e6VptUfmMNE) |
 
-- Reference Material - [Repo](./generative-ai-roadmap-2025/)
+## AI Agent Guides
 
-### Building custom agents with BAML
+| Guide Name                             | Reference Material                      | YouTube Video                                                |
+| -------------------------------------- | --------------------------------------- | ------------------------------------------------------------ |
+| Building custom agents with BAML       | [Repo](./baml-agents)                   | [https://youtu.be/Li4C1c0szmc](https://youtu.be/Li4C1c0szmc) |
+| Multi-Agent System with Google ADK     | [Repo](./adk-multi-agent/)              |                                                              |
+| Langgraph 101 (Python)                 | [Repo](./langgraph-101-k8s)             | [https://youtu.be/fvYWMq9tLdQ](https://youtu.be/fvYWMq9tLdQ) |
+| Langgraph 101 (Typescript)             | [Repo](./langgraph-101-ts)              |                                                              |
+| Pydantic AI 101                        | [Repo](./pydanticai-101)                | [https://youtu.be/ferNt5JTaGQ](https://youtu.be/ferNt5JTaGQ) |
+| LangGraph + PydanticAI                 | [Repo](./langgraph-101-task-management) | [https://youtu.be/P3qH5GVIxD0](https://youtu.be/P3qH5GVIxD0) |
+| PydanticGraph 101                      | [Repo](./pydantic-graphs-101/)          | [https://youtu.be/ePp7Gq2bJjE](https://youtu.be/ePp7Gq2bJjE) |
+| AutoGen DeepDive                       | [Repo](./autogen-k8s-basic/)            | [https://youtu.be/OdmyDGjNiCY](https://youtu.be/OdmyDGjNiCY) |
+| Building Custom Workflows with AutoGen | [Repo](./autogen-workflows/)            |                                                              |
+| Building Agents using MCP              | [Repo](./building-agents-with-mcp)      | [https://youtu.be/9izHUWherYw](https://youtu.be/9izHUWherYw) |
 
-- Reference Material - [Repo](./baml-agents)
-- YouTube Video - [https://youtu.be/Li4C1c0szmc](https://youtu.be/Li4C1c0szmc)
+## RAG Guides
 
-### Multi-Agent System with Google ADK
-
-- Reference Material - [Repo](./adk-multi-agent/)
-
-### Langgraph 101
-
-- Reference Material (for Python) - [Repo](./langgraph-101-k8s) | [YouTube Video](https://youtu.be/fvYWMq9tLdQ)
-- Reference Material (for Typescript) - [Repo](./langgraph-101-ts)
-
-### Pydantic AI 101
-
-- Reference Material - [Repo](./pydanticai-101)
-- YouTube Video - [https://youtu.be/ferNt5JTaGQ](https://youtu.be/ferNt5JTaGQ)
-
-### LangGraph + PydanticAI
-
-- Reference Material - [Repo](./langgraph-101-task-management)
-- YouTube Video - [https://youtu.be/P3qH5GVIxD0](https://youtu.be/P3qH5GVIxD0)
-
-### PydanticGraph 101
-
-- Reference Material - [Repo](./pydantic-graphs-101/)
-- YouTube Video - [https://youtu.be/ePp7Gq2bJjE](https://youtu.be/ePp7Gq2bJjE)
-
-### AutoGen DeepDive
-
-- Reference Material - [Repo](./autogen-k8s-basic/)
-- YouTube Video - [https://youtu.be/OdmyDGjNiCY](https://youtu.be/OdmyDGjNiCY)
-
-### Building Custom Workflows with AutoGen
-
-- Reference Material - [Repo](./autogen-workflows/)
-
-### RAG 101
-
-- Reference Material - [Repo](./rag-101)
-- YouTube Video - [https://youtu.be/Fm2ZzS5CTP8](https://youtu.be/Fm2ZzS5CTP8)
-
-### Agentic RAG
-
-- Reference Material (Using Pydantic AI) - [Repo](./agentic-rag-pydanticai)
-
-### Building Agents using MCP
-
-- Reference Material - [Repo](./building-agents-with-mcp)
-- YouTube Video - [https://youtu.be/9izHUWherYw](https://youtu.be/9izHUWherYw)
+| Guide Name                      | Reference Material               | YouTube Video                                                |
+| ------------------------------- | -------------------------------- | ------------------------------------------------------------ |
+| RAG 101                         | [Repo](./rag-101)                | [https://youtu.be/Fm2ZzS5CTP8](https://youtu.be/Fm2ZzS5CTP8) |
+| Agentic RAG (Using Pydantic AI) | [Repo](./agentic-rag-pydanticai) |                                                              |
 
 ## Kubernetes Guides
 
-### Predictive Autoscaling with Keda & Facebook Prophet
-
-- Reference Material - [Repo](./predictive-autoscaling/)
-- YouTube Video - [https://youtu.be/MhlkAivKkCw](https://youtu.be/MhlkAivKkCw)
-
-### KubeVela Introduction
-
-- Reference Material - [Repo](./kubevela-introduction/)
-
-### Monitoring Microservices in Docker using Prometheus and Grafana
-
-- Reference Material - [Repo](https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker)
-- YouTube Video - [https://youtu.be/jUhacrwEwDk](https://youtu.be/jUhacrwEwDk)
-
-### Shifting Policy Management left with OPA Gatekeeper
-
-- Reference Material - [Repo](./opa-gatekeeper)
+| Guide Name                                                      | Reference Material                                                                              | YouTube Video                                                |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Predictive Autoscaling with Keda & Facebook Prophet             | [Repo](./predictive-autoscaling/)                                                               | [https://youtu.be/MhlkAivKkCw](https://youtu.be/MhlkAivKkCw) |
+| KubeVela Introduction                                           | [Repo](./kubevela-introduction/)                                                                |                                                              |
+| Monitoring Microservices in Docker using Prometheus and Grafana | [Repo](https://github.com/YourTechBud/devops-guide/tree/master/monitoring-microservices-docker) | [https://youtu.be/jUhacrwEwDk](https://youtu.be/jUhacrwEwDk) |
+| Shifting Policy Management left with OPA Gatekeeper             | [Repo](./opa-gatekeeper)                                                                        |                                                              |
 
 ## Serverless
 
-### Google Cloud Run Introduction
-
-- Reference Material - [Repo](./google-cloud-run-introduction/)
-- YouTube Video - [https://youtu.be/bKBBbryKj1w](https://youtu.be/bKBBbryKj1w)
-
-### Google Cloud Functions Introduction
-
-- Reference Material - [Repo](./google-cloud-functions-introduction/)
-- YouTube Video - [https://youtu.be/I0vJDmw6P4c](https://youtu.be/I0vJDmw6P4c)
+| Guide Name                          | Reference Material                             | YouTube Video                                                |
+| ----------------------------------- | ---------------------------------------------- | ------------------------------------------------------------ |
+| Google Cloud Run Introduction       | [Repo](./google-cloud-run-introduction/)       | [https://youtu.be/bKBBbryKj1w](https://youtu.be/bKBBbryKj1w) |
+| Google Cloud Functions Introduction | [Repo](./google-cloud-functions-introduction/) | [https://youtu.be/I0vJDmw6P4c](https://youtu.be/I0vJDmw6P4c) |
