@@ -11,7 +11,7 @@ two-agent = "workflow_patterns.two_agent.main:main"
 
 [tool.poetry.dependencies]
 python = "~3.10"
-pyautogen = "^0.2.28"
+ag2 = "^0.2.28"
 
 
 [build-system]
