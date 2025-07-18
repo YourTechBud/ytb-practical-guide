@@ -642,14 +642,14 @@ files = [
 pyasn1 = ">=0.4.6,<0.6.0"
 
 [[package]]
-name = "pyautogen"
+name = "ag2"
 version = "0.1.14"
 description = "Enabling Next-Gen LLM Applications via Multi-Agent Conversation Framework"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "pyautogen-0.1.14-py3-none-any.whl", hash = "sha256:4f12b248af5350958a6073952123a802334b3d3dcd700353cdf25a8aacac4298"},
-    {file = "pyautogen-0.1.14.tar.gz", hash = "sha256:1e9334cc7a69e73907154ff7c9c323f13aab7b70bdc8cce836be7ea92a127fff"},
+    {file = "ag2-0.1.14-py3-none-any.whl", hash = "sha256:4f12b248af5350958a6073952123a802334b3d3dcd700353cdf25a8aacac4298"},
+    {file = "ag2-0.1.14.tar.gz", hash = "sha256:1e9334cc7a69e73907154ff7c9c323f13aab7b70bdc8cce836be7ea92a127fff"},
 ]
 
 [package.dependencies]
