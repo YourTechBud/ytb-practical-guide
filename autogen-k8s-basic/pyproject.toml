@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-pyautogen = "^0.1.14"
+ag2 = "^0.1.14"
 kubernetes = "^28.1.0"
 
 [build-system]
