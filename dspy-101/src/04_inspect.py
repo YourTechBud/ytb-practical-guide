@@ -1,6 +1,6 @@
 import os
-import dspy
 
+import dspy
 from dotenv import load_dotenv
 
 from modules.intent_classifier import classify_intent

@@ -1,7 +1,7 @@
 import os
 from typing import Literal
-import dspy
 
+import dspy
 from dotenv import load_dotenv
 
 load_dotenv()

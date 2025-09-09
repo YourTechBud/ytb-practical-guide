@@ -1,8 +1,8 @@
 import os
-import dspy
 
-from dspy.evaluate import Evaluate
+import dspy
 from dotenv import load_dotenv
+from dspy.evaluate import Evaluate
 
 from modules.intent_classifier import classify_intent
 
@@ -14,6 +14,7 @@ lm = dspy.LM(
     "openai/gemma3:4b",
     api_key=os.getenv("OPENAI_API_KEY"),
     api_base=os.getenv("OPENAI_BASE_URL"),
+    cache=False,
 )
 dspy.configure(lm=lm)
 
@@ -56,7 +57,7 @@ for index, value in enumerate(devset):
 
 
 # Define our metric to evaluate prediction
-def metric(example, prediction):
+def metric(example: dspy.Example, prediction: dspy.Prediction):
     return example.action == prediction.action
 
 

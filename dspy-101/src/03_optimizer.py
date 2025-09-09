@@ -1,9 +1,8 @@
 import os
+
 import dspy
-
-from dspy.teleprompt import BootstrapFewShotWithRandomSearch
-
 from dotenv import load_dotenv
+from dspy.teleprompt import BootstrapFewShotWithRandomSearch
 
 from modules.intent_classifier import classify_intent
 
