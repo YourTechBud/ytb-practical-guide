@@ -4,29 +4,26 @@
     "train": [],
     "demos": [
       {
-        "augmented": true,
-        "query": "I have done my dishes for today",
-        "reasoning": "The user has completed a task (doing the dishes). Therefore, the appropriate action is to mark the task as done.",
-        "action": "MarkTaskAsDone"
-      },
-      {
-        "augmented": true,
-        "query": "I cleaned up my house",
-        "reasoning": "The user has completed the task of cleaning their house. This implies marking the task as done.",
-        "action": "MarkTaskAsDone"
-      },
-      {
         "query": "I don't need to buy a new water bottle",
         "action": "DeleteTask",
         "reasoning": "The user is stating that they don't need a water bottle. This suggests that there was a task which no longer needs to be done. Hence we shall delete this task."
       },
       {
-        "query": "He already did the dishes for me",
+        "query": "Delete the task about doing the dishes",
         "action": "DeleteTask"
       },
       {
-        "query": "Delete the task about doing the dishes",
-        "action": "DeleteTask"
+        "query": "Whats the plan for today",
+        "action": "GetTasks"
+      },
+      {
+        "query": "I cleaned up my house",
+        "action": "MarkTaskAsDone"
+      },
+      {
+        "query": "I have done my dishes for today",
+        "action": "MarkTaskAsDone",
+        "reasoning": "The user has completed the task of doing the dishes. This implies marking the task as done."
       }
     ],
     "signature": {

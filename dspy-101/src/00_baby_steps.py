@@ -23,3 +23,5 @@ qa_bot = dspy.Predict(signature)
 # Generate a prediction
 prediction = qa_bot(question="What's the meaning of life")
 print(prediction)
+
+dspy.inspect_history()

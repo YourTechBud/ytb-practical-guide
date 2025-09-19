@@ -11,7 +11,7 @@ load_dotenv()
 
 # Configure DSPy with your model
 lm = dspy.LM(
-    "openai/gemma3:4b",
+    "openai/gemma3:12b",
     api_key=os.getenv("OPENAI_API_KEY"),
     api_base=os.getenv("OPENAI_BASE_URL"),
     cache=False,

@@ -33,7 +33,7 @@ test ClassifyIntent_markTaskAsDone1 {
   }
 }
 
-test ClassifyIntent_markTaskAsDone2 {
+test ClassifyIntent_deleteTask {
   functions [ClassifyIntent]
   args {
     query "I don't need groceries"

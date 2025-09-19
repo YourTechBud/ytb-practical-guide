@@ -2,6 +2,10 @@
 
 > Consider giving this repo a ✨! Thanks!!!
 
+Here's a link to the YouTube video explaining this setup in greater detail:
+
+[![Why DSPy beats prompt engineering](./assets/Thumbnail.png)](https://youtu.be/ENUbSFtHweo)
+
 ## Prerequisites
 
 You need to have the following tools installed:
@@ -36,6 +40,7 @@ uv sync
 ### 4. Run the example scripts
 
 All example scripts are in the `src/` directory.
+
 - `00_baby_steps.py` -> Sample DSPy program to showcase basic syntax.
 - `01_intent_classifier.py` -> The intent classifier equivalent in DSPy.
 - `02_evaluation.py` -> Simple evaluation dataset for our DSPy program.

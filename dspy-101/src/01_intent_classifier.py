@@ -31,5 +31,4 @@ classify_intent = dspy.ChainOfThought(IntentSignature)
 # Make a prediction
 prediction = classify_intent(query="I bought my groceries")
 
-dspy.inspect_history()
 print(prediction)
