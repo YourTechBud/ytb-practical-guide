@@ -1,0 +1,12 @@
+[project]
+name = "dspy-101"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "baml-py>=0.205.0",
+    "dspy>=3.0.2",
+    "pandas>=2.3.2",
+    "python-dotenv>=1.1.1",
+]

@@ -8,6 +8,12 @@ The repository contains reference materials for the DevOps related videos made o
 | -------------------------- | ------------------------------------- | ------------------------------------------------------------ |
 | Generative AI Roadmap 2025 | [Repo](./generative-ai-roadmap-2025/) | [https://youtu.be/e6VptUfmMNE](https://youtu.be/e6VptUfmMNE) |
 
+## DSPy Guides
+
+| Guide Name                         | Reference Material  | YouTube Video                                                |
+| ---------------------------------- | ------------------- | ------------------------------------------------------------ |
+| Why DSPy beats prompt engineering? | [Repo](./dspy-101/) | [https://youtu.be/ENUbSFtHweo](https://youtu.be/ENUbSFtHweo) |
+
 ## AI Agent Guides
 
 | Guide Name                             | Reference Material                      | YouTube Video                                                |

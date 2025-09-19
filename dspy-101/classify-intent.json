@@ -1,0 +1,55 @@
+{
+  "predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "query": "I don't need to buy a new water bottle",
+        "action": "DeleteTask",
+        "reasoning": "The user is stating that they don't need a water bottle. This suggests that there was a task which no longer needs to be done. Hence we shall delete this task."
+      },
+      {
+        "query": "Delete the task about doing the dishes",
+        "action": "DeleteTask"
+      },
+      {
+        "query": "Whats the plan for today",
+        "action": "GetTasks"
+      },
+      {
+        "query": "I cleaned up my house",
+        "action": "MarkTaskAsDone"
+      },
+      {
+        "query": "I have done my dishes for today",
+        "action": "MarkTaskAsDone",
+        "reasoning": "The user has completed the task of doing the dishes. This implies marking the task as done."
+      }
+    ],
+    "signature": {
+      "instructions": "Indentify user's intended action based on the given query.",
+      "fields": [
+        {
+          "prefix": "Query:",
+          "description": "${query}"
+        },
+        {
+          "prefix": "Reasoning: Let's think step by step in order to",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Action:",
+          "description": "${action}"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.13",
+      "dspy": "3.0.2",
+      "cloudpickle": "3.1"
+    }
+  }
+}
