@@ -1,0 +1,14 @@
+[project]
+name = "dspy-and-baml"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "baml-py>=0.212.0",
+    "gepa>=0.0.18",
+    "litellm>=1.79.0",
+    "pydantic>=2.12.3",
+    "python-dotenv>=1.2.1",
+    "typing-extensions>=4.15.0",
+]

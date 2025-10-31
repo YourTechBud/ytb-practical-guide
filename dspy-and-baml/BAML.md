@@ -1,0 +1,5 @@
+- Passing instructions is manual
+- Passing collector is manual
+- Pass multiple instructions?
+- Initial seed instructions?
+- Playground integration with all this?
