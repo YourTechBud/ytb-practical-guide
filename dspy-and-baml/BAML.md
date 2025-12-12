@@ -1,5 +1,6 @@
 - Passing instructions is manual
 - Passing collector is manual
+- I dont wanna pass the entire http request as the input. Gimme a handle to bamls inputs
 - Pass multiple instructions?
 - Initial seed instructions?
 - Playground integration with all this?
